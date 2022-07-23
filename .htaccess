@@ -14,7 +14,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php
 
-RewriteRule ^$ views/index.php
+RewriteRule ^$ views/dashboard.php
 
 # ensure https
 RewriteCond %{HTTP_HOST} !^localhost$ [NC]

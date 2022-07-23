@@ -6,10 +6,12 @@
     "require": {
         "php": "^8.0",
         "ext-curl": "^8.0",
-        "jeroendn/php-js-console-logger": "^1.0"
+        "jeroendn/php-js-console-logger": "^1.0",
+        "guzzlehttp/guzzle": "^7.4"
     },
     "autoload": {
         "psr-4": {
+            "SSD\\Integrations\\": "php/integrations"
         }
     },
     "prefer-stable": true
