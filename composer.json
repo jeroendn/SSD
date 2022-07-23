@@ -1,0 +1,16 @@
+{
+    "name": "jeroendn/ssd",
+    "description": "Jeroen's Statistics/Status Dashboard",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": "^8.0",
+        "ext-curl": "^8.0",
+        "jeroendn/php-js-console-logger": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+        }
+    },
+    "prefer-stable": true
+}

@@ -1,0 +1,23 @@
+#DON'T SHOW DIRECTORY LISTINGS
+Options -Indexes
+
+DirectoryIndex index.php
+
+ErrorDocument 400 /views/404.php
+ErrorDocument 401 /views/404.php
+ErrorDocument 403 /views/404.php
+ErrorDocument 404 /views/404.php
+ErrorDocument 405 /views/404.php
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+
+RewriteRule ^$ views/index.php
+
+# ensure https
+RewriteCond %{HTTP_HOST} !^localhost$ [NC]
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
