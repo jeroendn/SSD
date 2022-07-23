@@ -4,6 +4,7 @@ namespace SSD\Integrations\Steam;
 
 use GuzzleHttp\Client as GuzzleClient;
 use SSD\Integrations\Integration;
+use SSD\Integrations\Steam\Entity\Game;
 use Throwable;
 
 final class Client extends Integration
@@ -22,7 +23,7 @@ final class Client extends Integration
   }
 
   /**
-   * @return array
+   * @return Game[]
    */
   public function getOwnedGames(): array
   {
@@ -35,7 +36,12 @@ final class Client extends Integration
       return []; // Silent fail
     }
 
-    $games = json_decode($response->getBody(), true)['response']['games'] ?? [];
+    $gamesData = json_decode($response->getBody(), true)['response']['games'] ?? [];
+
+    $games = [];
+    foreach ($gamesData as $gameData) {
+      $games[] = new Game($gameData);
+    }
 
 //    print_r($games);
 
