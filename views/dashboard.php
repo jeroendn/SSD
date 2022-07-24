@@ -15,7 +15,7 @@ require_once __DIR__ . '/../php/session.php';
 
 <main>
 
-  <?php include __DIR__ . '/elements/steamtest.php'; ?>
+  <?php getWidget('steam', 'top10PlayedGames'); ?>
 
 </main>
 

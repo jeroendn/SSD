@@ -3,12 +3,12 @@
 namespace SSD\Integrations\Steam;
 
 use GuzzleHttp\Client as GuzzleClient;
-use SSD\Integrations\Integration;
 use SSD\Integrations\Steam\Entity\Game;
 use Throwable;
 
-final class Client extends Integration
+final class Client
 {
+  private string $apiKey;
   private string $steamId;
   private string $baseUrl = 'https://api.steampowered.com/';
 
@@ -16,8 +16,6 @@ final class Client extends Integration
 
   public function __construct()
   {
-    parent::__construct();
-
     $this->apiKey = API_KEY_STEAM;
     $this->steamId = API_STEAM_ID;
   }
@@ -42,8 +40,6 @@ final class Client extends Integration
     foreach ($gamesData as $gameData) {
       $games[] = new Game($gameData);
     }
-
-//    print_r($games);
 
     return $games;
   }
