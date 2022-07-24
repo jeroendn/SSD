@@ -6,11 +6,18 @@ use SSD\Integrations\Steam\Steam;
 
 $steam = new Steam;
 $steamClient = new SteamClient();
+
+$playerSummary = $steamClient->getPlayerSummary();
 ?>
 
-<div id="widget-steam-top-10-played-games" class="refresh">
-  <?php $playerSummary = $steamClient->getPlayerSummary(); ?>
-  <img src="<?= $playerSummary->avatarMedium ?>">
-  <p><?= $playerSummary->personaName ?></p>
-  <p><?= PlayerSummary::PERSONA_STATES[$playerSummary->personaState] ?></p>
+<div id="widget-steam-profile-status" class="widget steam-widget auto-refresh">
+  <p class="widget-title">Steam profile status</p>
+  <div style="display: flex;">
+    <img src="<?= $playerSummary->avatarMedium ?>">
+    <div style="display: block; margin-left: 10px;">
+      <p><?= $playerSummary->personaName ?></p>
+      <p><?= PlayerSummary::PERSONA_STATES[$playerSummary->personaState] ?></p>
+    </div>
+  </div>
+  <p>Currently playing: <?= $playerSummary->gameExtraInfo ?? '-' ?></p>
 </div>

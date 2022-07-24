@@ -16,7 +16,34 @@ require_once __DIR__ . '/../php/session.php';
 <main>
 
   <h1>Steam</h1>
-  <?php getWidget('steam', 'top10PlayedGames'); ?>
+
+  <div class="grid-container">
+
+    <div class="grid-item grid-item-1-1">
+      <?php getWidget('steam', 'profileStatus'); ?>
+    </div>
+
+  </div>
+
+  <div class="grid-container">
+
+    <div class="grid-item grid-item-1-2">
+      <?php getWidget('steam', 'top10PlayedGames'); ?>
+    </div>
+
+    <div class="grid-item grid-item-1-2">
+      <?php getWidget('steam', 'top10PlayedGamesWindows'); ?>
+    </div>
+
+    <div class="grid-item grid-item-1-2">
+      <?php getWidget('steam', 'top10PlayedGamesMac'); ?>
+    </div>
+
+    <div class="grid-item grid-item-1-2">
+      <?php getWidget('steam', 'top10PlayedGamesLinux'); ?>
+    </div>
+
+  </div>
 
 </main>
 

@@ -2,17 +2,17 @@
 
 use SSD\Integrations\Steam\Steam;
 
+$platform = $platform ?? 'all';
 $steam = new Steam;
 ?>
 
-<div id="widget-steam-top-10-played-games" class="refresh">
-  <?php
-  $games = $steam->getTop10PlayedGames();
-
-  foreach ($games as $game) {
-    echo '<img src="https://media.steampowered.com/steamcommunity/public/images/apps/' . $game->appId . '/' . $game->imgIconUrl . '.jpg"> ';
-    echo $game->name . ' - ';
-    echo $game->getPlaytimeForever(true) . ' Hrs<br>';
-  }
-  ?>
+<div id="widget-steam-top-10-played-games" class="widget steam-widget auto-refresh">
+  <p class="widget-title">Top 10 played games <?= ($platform !== 'all' ? '(' . ucfirst($platform) . ')' : '') ?></p>
+  <?php $games = $steam->getTop10PlayedGames($platform); ?>
+  <?php foreach ($games as $game): ?>
+    <div class="game">
+      <img src="https://media.steampowered.com/steamcommunity/public/images/apps/<?= $game->appId ?>/<?= $game->imgIconUrl ?>.jpg">
+      <p><?= $game->name ?><span>&nbsp;<?= $game->getPlaytimeForever(true, $platform) ?> Hrs</span></p>
+    </div>
+  <?php endforeach; ?>
 </div>

@@ -15,11 +15,11 @@ require_once __DIR__ . '/../php/session.php';
 
 <main>
 
-  <div class="widget-container">
+  <div class="grid-item grid-item-1-1">
     <?php getWidget('steam', 'profileStatus'); ?>
   </div>
 
-  <div class="widget-container">
+  <div class="grid-item grid-item-1-2">
     <?php getWidget('steam', 'top10PlayedGames'); ?>
   </div>
 
