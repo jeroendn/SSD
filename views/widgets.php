@@ -18,15 +18,23 @@ require_once __DIR__ . '/../php/session.php';
   <h1>Steam</h1>
 
   <div class="grid-container">
-
     <div class="grid-item grid-item-1-1">
       <?php getWidget('steam', 'profileStatus'); ?>
     </div>
-
   </div>
 
   <div class="grid-container">
+    <div class="grid-item grid-item-1-2">
+      <?php getWidget('steam', 'playtimeLast2Weeks'); ?>
+    </div>
 
+    <div class="grid-item grid-item-1-1">
+      <?php getWidget('steam', 'playtimeLast2Weeks'); ?>
+    </div>
+  </div>
+
+
+  <div class="grid-container">
     <div class="grid-item grid-item-1-2">
       <?php getWidget('steam', 'top10PlayedGames'); ?>
     </div>
@@ -42,7 +50,6 @@ require_once __DIR__ . '/../php/session.php';
     <div class="grid-item grid-item-1-2">
       <?php getWidget('steam', 'top10PlayedGamesLinux'); ?>
     </div>
-
   </div>
 
 </main>

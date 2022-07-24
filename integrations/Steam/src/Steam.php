@@ -45,4 +45,19 @@ final class Steam
 
     return $topTenGames;
   }
+
+  public function getTop10PlayedGamesLast2Weeks(): array
+  {
+    $games = $this->client->getOwnedGames();
+
+    sortArrayByProperty($games, 'playtime2Weeks', true);
+
+    $topTenGames = [];
+
+    for ($i = 0; $i < 10; $i++) {
+      $topTenGames[] = $games[$i];
+    }
+
+    return $topTenGames;
+  }
 }

@@ -8,6 +8,7 @@ body {
   margin: 0;
   color: #fff;
   font-family: sans-serif;
+  overflow-x: hidden;
 }
 
 p {
@@ -16,6 +17,13 @@ p {
 
 .grid-container {
   display: inline-block;
+  width: 100vw;
+}
+
+.grid-group-vertical {
+  display: inline-flex;
+  flex-flow: column;
+  float: left;
 }
 
 .grid-item {
@@ -24,22 +32,22 @@ p {
   overflow: hidden;
 }
 
-.grid-item-1-1 {
+.grid-item.grid-item-1-1 {
   width: var(--grid-item-width);
   height: var(--grid-item-height);
 }
 
-.grid-item-1-2 {
+.grid-item.grid-item-1-2 {
   width: var(--grid-item-width);
   height: calc(var(--grid-item-height) * 2);
 }
 
-.grid-item-2-1 {
+.grid-item.grid-item-2-1 {
   width: calc(var(--grid-item-width) * 2);
   height: var(--grid-item-height);
 }
 
-.grid-item-2-2 {
+.grid-item.grid-item-2-2 {
   width: calc(var(--grid-item-width) * 2);
   height: calc(var(--grid-item-height) * 2);
 }
@@ -52,29 +60,29 @@ p {
   padding: 3px;
 }
 
-.widget-title {
+.widget .widget-title {
   font-size: 15px;
   font-weight: bold;
   margin: 0 0 5px 0;
   background-color: #202325;
 }
 
-.steam-widget {
+.widget.steam-widget {
   background-color: #333;
 }
 
-.game {
+.widget.steam-widget .game {
   display: flex;
 }
 
-.game img {
-  width: 30px;
+.widget.steam-widget .game img {
+  width: 28px;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
 }
 
-.game p {
+.widget.steam-widget .game p {
   font-size: 14px;
   margin: 0 0 0 5px;
   width: 100%;
@@ -82,7 +90,7 @@ p {
   justify-content: space-between;
 }
 
-.game p span {
+.widget.steam-widget .game p span {
   white-space: nowrap;
   font-weight: bold;
 }
