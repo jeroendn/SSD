@@ -2,7 +2,7 @@
 
 namespace SSD\Integrations\Steam;
 
-use SSD\Integrations\Steam\Entity\Game;
+use SSD\Integrations\Steam\Entity\OwnedGame;
 
 final class Steam
 {
@@ -14,7 +14,7 @@ final class Steam
   }
 
   /**
-   * @return Game[]
+   * @return OwnedGame[]
    */
   public function getTop10PlayedGames(string $platform = 'all'): array
   {

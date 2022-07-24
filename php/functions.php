@@ -18,6 +18,16 @@ function h(string $string): string
 }
 
 /**
+ * @param mixed $var
+ * @return void
+ */
+function dd(mixed $var): void
+{
+  var_dump($var);
+  die;
+}
+
+/**
  * Sort an array of objects by a property of the object.
  * Does not work on multidimensional arrays.
  * @param array $array

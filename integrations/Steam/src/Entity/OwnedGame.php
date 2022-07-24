@@ -2,7 +2,7 @@
 
 namespace SSD\Integrations\Steam\Entity;
 
-class Game extends SteamEntity
+class OwnedGame extends SteamEntity
 {
   public int $appId;
   public string $name;
@@ -32,7 +32,7 @@ class Game extends SteamEntity
    * @param string $platform
    * @return int
    */
-  public function playtimeForever(bool $inHours = false, string $platform = 'all'): int
+  public function getPlaytimeForever(bool $inHours = false, string $platform = 'all'): int
   {
     switch ($platform) {
       case 'windows':

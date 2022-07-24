@@ -3,7 +3,8 @@
 namespace SSD\Integrations\Steam;
 
 use GuzzleHttp\Client as GuzzleClient;
-use SSD\Integrations\Steam\Entity\Game;
+use SSD\Integrations\Steam\Entity\OwnedGame;
+use SSD\Integrations\Steam\Entity\PlayerSummary;
 use Throwable;
 
 final class Client
@@ -13,6 +14,7 @@ final class Client
   private string $baseUrl = 'https://api.steampowered.com/';
 
   private string $urlGetOwnedGames = 'IPlayerService/GetOwnedGames/v0001/';
+  private string $urlGetPlayerSummaries = 'ISteamUser/GetPlayerSummaries/v0002/';
 
   public function __construct()
   {
@@ -21,7 +23,26 @@ final class Client
   }
 
   /**
-   * @return Game[]
+   * @return PlayerSummary|null Null on failure of request.
+   */
+  public function getPlayerSummary(): ?PlayerSummary
+  {
+    $url = $this->baseUrl . $this->urlGetPlayerSummaries . '?key=' . $this->apiKey . '&steamids=' . $this->steamId . '&format=json';
+
+    try {
+      $response = (new GuzzleClient())->request('GET', $url);
+    }
+    catch (Throwable $e) {
+      return null; // Silent fail
+    }
+
+    $playerSummaryData = json_decode($response->getBody(), true)['response']['players']['0'] ?? [];
+
+    return new PlayerSummary($playerSummaryData);
+  }
+
+  /**
+   * @return OwnedGame[]
    */
   public function getOwnedGames(): array
   {
@@ -38,7 +59,7 @@ final class Client
 
     $games = [];
     foreach ($gamesData as $gameData) {
-      $games[] = new Game($gameData);
+      $games[] = new OwnedGame($gameData);
     }
 
     return $games;

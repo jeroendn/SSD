@@ -5,14 +5,14 @@ use SSD\Integrations\Steam\Steam;
 $steam = new Steam;
 ?>
 
-<section>
+<div id="widget-steam-top-10-played-games" class="refresh">
   <?php
   $games = $steam->getTop10PlayedGames();
 
   foreach ($games as $game) {
     echo '<img src="https://media.steampowered.com/steamcommunity/public/images/apps/' . $game->appId . '/' . $game->imgIconUrl . '.jpg"> ';
     echo $game->name . ' - ';
-    echo $game->playtimeForever(true) . ' Hrs<br>';
+    echo $game->getPlaytimeForever(true) . ' Hrs<br>';
   }
   ?>
-</section>
+</div>
