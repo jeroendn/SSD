@@ -20,7 +20,7 @@ p {
 
 .grid-item {
   float: left;
-  background-color: rgba(255, 0, 0, 0.3333333333);
+  background-color: #ff000055;
   overflow: hidden;
 }
 
@@ -69,8 +69,6 @@ p {
 
 .game img {
   width: 30px;
-  height: -webkit-max-content;
-  height: -moz-max-content;
   height: max-content;
 }
 
@@ -86,6 +84,3 @@ p {
   white-space: nowrap;
   font-weight: bold;
 }
-
-
-/*# sourceMappingURL=style.css.map*/
