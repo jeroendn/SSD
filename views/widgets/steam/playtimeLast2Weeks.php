@@ -5,7 +5,7 @@ use SSD\Integrations\Steam\Steam;
 $steam = new Steam;
 ?>
 
-<div id="widget-steam-top-10-played-games" class="widget steam-widget auto-refresh">
+<div id="widget-steam-playtime-last-2-weeks" class="widget steam-widget" refresh-rate="60000">
   <p class="widget-title">Playtime last 2 weeks</p>
   <?php $games = $steam->getTop10PlayedGamesLast2Weeks(); ?>
   <?php foreach ($games as $game): ?>

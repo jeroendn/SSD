@@ -8,6 +8,9 @@ require_once __DIR__ . '/../php/session.php';
   <title>SS Dashboard</title>
   <meta name="description" content="Statistics/Status Dashboard"/>
   <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/fonts/fontawesome/css/all.css">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -30,6 +33,8 @@ require_once __DIR__ . '/../php/session.php';
   </div>
 
 </main>
+
+<?php require_once __DIR__.'/elements/js.php'; ?>
 
 </body>
 </html>

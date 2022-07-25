@@ -1,3 +1,18 @@
+@font-face {
+  font-family: NetflixSans;
+  src: url("/fonts/Netflix Sans Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: NetflixSansLight;
+  src: url("/fonts/Netflix Sans Light.otf") format("opentype");
+}
+
+@font-face {
+  font-family: NetflixSansBold;
+  src: url("/fonts/Netflix Sans Bold.otf") format("opentype");
+}
+
 :root {
   --grid-item-width: 250px;
   --grid-item-height: 200px;
@@ -7,7 +22,7 @@ body {
   background-color: #111;
   margin: 0;
   color: #fff;
-  font-family: sans-serif;
+  font-family: "Netflix Sans Light", sans-serif;
   overflow-x: hidden;
 }
 
@@ -63,6 +78,7 @@ p {
 .widget .widget-title {
   font-size: 15px;
   font-weight: bold;
+  font-family: "Netflix Sans Bold", sans-serif;
   margin: 0 0 5px 0;
   background-color: #202325;
 }
@@ -93,6 +109,7 @@ p {
 .widget.steam-widget .game p span {
   white-space: nowrap;
   font-weight: bold;
+  font-family: "Netflix Sans Bold", sans-serif;
 }
 
 

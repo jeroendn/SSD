@@ -6,7 +6,7 @@ $platform = $platform ?? 'all';
 $steam = new Steam;
 ?>
 
-<div id="widget-steam-top-10-played-games" class="widget steam-widget auto-refresh">
+<div id="widget-steam-top-10-played-games<?= ($platform !== 'all' ? '-' . $platform : '') ?>" class="widget steam-widget auto-refresh" refresh-rate="60000">
   <p class="widget-title">Top 10 played games <?= ($platform !== 'all' ? '(' . ucfirst($platform) . ')' : '') ?></p>
   <?php $games = $steam->getTop10PlayedGames($platform); ?>
   <?php foreach ($games as $game): ?>

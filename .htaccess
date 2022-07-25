@@ -16,6 +16,7 @@ RewriteRule ^(.*)$ $1.php
 
 RewriteRule ^$ views/dashboard.php
 RewriteRule ^widgets$ views/widgets.php
+RewriteRule ^widget$ views/widgets/ajaxWidget.php
 
 # ensure https
 RewriteCond %{HTTP_HOST} !^localhost$ [NC]

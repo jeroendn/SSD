@@ -10,7 +10,7 @@ $steamClient = new SteamClient();
 $playerSummary = $steamClient->getPlayerSummary();
 ?>
 
-<div id="widget-steam-profile-status" class="widget steam-widget auto-refresh">
+<div id="widget-steam-profile-status" class="widget steam-widget auto-refresh" refresh-rate="10000">
   <p class="widget-title">Steam profile status</p>
   <div style="display: flex;">
     <img src="<?= $playerSummary->avatarMedium ?>">
