@@ -18,6 +18,14 @@ require_once __DIR__ . '/../php/session.php';
 
 <main>
 
+  <h1>Spotify</h1>
+
+  <div class="grid-container">
+    <div class="grid-item grid-item-1-1">
+      <?php getWidget('spotify', 'player'); ?>
+    </div>
+  </div>
+
   <h1>Steam</h1>
 
   <div class="grid-container">

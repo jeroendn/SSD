@@ -7,10 +7,12 @@
     "php": "^8.0",
     "ext-curl": "^8.0",
     "jeroendn/php-js-console-logger": "^1.0",
-    "guzzlehttp/guzzle": "^7.4"
+    "guzzlehttp/guzzle": "^7.4",
+    "jwilsson/spotify-web-api-php": "^5.2"
   },
   "autoload": {
     "psr-4": {
+      "SSD\\Integrations\\Spotify\\": "integrations/Spotify/src",
       "SSD\\Integrations\\Steam\\": "integrations/Steam/src"
     }
   },

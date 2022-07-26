@@ -32,9 +32,13 @@ require_once __DIR__ . '/../php/session.php';
     <?php getWidget('steam', 'top10PlayedGames'); ?>
   </div>
 
+  <div class="grid-item grid-item-1-1">
+    <?php getWidget('spotify', 'player'); ?>
+  </div>
+
 </main>
 
-<?php require_once __DIR__.'/elements/js.php'; ?>
+<?php require_once __DIR__ . '/elements/js.php'; ?>
 
 </body>
 </html>
