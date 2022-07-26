@@ -43,7 +43,6 @@ p {
 
 .grid-item {
   float: left;
-  background-color: #ff000055;
   overflow: hidden;
 
   &.grid-item-1-1 {
@@ -68,25 +67,70 @@ p {
 }
 
 .widget {
+  position: relative;
   height: 100%;
 
-  > * {
+  .widget-heading .widget-title {
+    font-size: 17px;
+    font-weight: bold;
+    font-family: 'Netflix Sans Bold', sans-serif;
+    margin: 0;
     padding: 3px;
   }
 
-  .widget-title {
-    font-size: 15px;
-    font-weight: bold;
-    font-family: 'Netflix Sans Bold', sans-serif;
-    margin: 0 0 5px 0;
-    background-color: #202325;
+  &.spotify-widget {
+    background-color: #333;
+
+    .widget-heading .widget-title {
+      background-color: #1ed760;
+      color: #000;
+    }
+
+    &#widget-spotify-player {
+      background-size: cover;
+      background-position: center;
+
+      .widget-body {
+        background-color: #000000cc;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        padding: 3px;
+
+        .banner-and-names {
+          display: flex;
+
+          img {
+            height: max-content;
+            width: 74px;
+          }
+
+          .names {
+            margin-left: 5px;
+            max-width: calc(100% - 85px);
+
+            p {
+              margin: 0 0 5px 0;
+              font-weight: bold;
+              font-family: 'Netflix Sans Bold', sans-serif;
+              white-space: nowrap;
+              overflow: hidden;
+            }
+          }
+        }
+      }
+    }
   }
 
   &.steam-widget {
     background-color: #333;
 
+    .widget-heading .widget-title {
+      background-color: #202325;
+    }
+
     &#widget-steam-profile-status {
-      div p {
+      p:not(.widget-title) {
         margin: 0 0 5px 0;
         font-size: 14px;
       }
@@ -94,14 +138,16 @@ p {
 
     .game {
       display: flex;
+      margin: 3px;
 
       img {
-        width: 28px;
+        width: 32px;
         height: max-content;
       }
 
       p {
         font-size: 14px;
+        line-height: 16px;
         margin: 0 0 0 5px;
         width: 100%;
         display: inline-flex;

@@ -7,14 +7,33 @@ $spotifyClient = new SpotifyClient();
 $playbackState = $spotifyClient->getCurrentlyPlayingTrack();
 ?>
 
-<div id="widget-spotify-player" class="widget spotify-widget auto-refresh" refresh-rate="5000">
-  <p class="widget-title">Now playing</p>
-  <?= $playbackState->item->name ?><br>
-  <?= $playbackState->item->album->name ?><br>
-  <?= $playbackState->item->artists[0]->name ?><br>
-  <?= $playbackState->progress_ms ?>
-  <progress id="spotify-player-progress-bar" max="<?= $playbackState->item->duration_ms ?>" value="<?= $playbackState->progress_ms ?>"> 70% </progress>
-  <?= $playbackState->item->duration_ms ?>
-  <br>
-  <img src="<?= $playbackState->item->album->images[2]->url ?>">
+<div id="widget-spotify-player" class="widget spotify-widget auto-refresh" refresh-rate="5000" style="background-image: url(<?= $playbackState->item->album->images[0]->url ?>)">
+  <div class="widget-heading">
+    <p class="widget-title">Now playing</p>
+  </div>
+  <div class="widget-body">
+    <div class="banner-and-names">
+      <img src="<?= $playbackState->item->album->images[0]->url ?>">
+      <div class="names">
+        <p><?= $playbackState->item->name ?></p>
+        <p><?= $playbackState->item->album->name ?></p>
+        <p><?php
+          $isFirstLoop = true;
+          foreach ($playbackState->item->artists as $artist) {
+            if ($isFirstLoop) {
+              echo $artist->name;
+              $isFirstLoop = false;
+            }
+            else {
+              echo ', ' . $artist->name;
+            }
+          }
+          ?>
+        </p>
+      </div>
+    </div>
+    <?= $playbackState->progress_ms ?>
+    <progress id="spotify-player-progress-bar" max="<?= $playbackState->item->duration_ms ?>" value="<?= $playbackState->progress_ms ?>"> 70%</progress>
+    <?= $playbackState->item->duration_ms ?>
+  </div>
 </div>
