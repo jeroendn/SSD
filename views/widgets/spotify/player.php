@@ -2,7 +2,7 @@
 
 use SSD\Integrations\Spotify\Client as SpotifyClient;
 
-$spotifyClient = new SpotifyClient();
+$spotifyClient = $_SESSION['spotify_client'] ?? new SpotifyClient; // Do not create a new instance if we already have one
 
 $playbackState = $spotifyClient->getCurrentlyPlayingTrack();
 ?>

@@ -4,11 +4,13 @@ namespace SSD\Integrations\Spotify;
 
 use SpotifyWebAPI\Session;
 use SpotifyWebAPI\SpotifyWebAPI;
+use SpotifyWebAPI\SpotifyWebAPIAuthException;
 
 final class Client
 {
   private Session $session;
   private SpotifyWebAPI $api;
+  private array $tokens;
 
   public function __construct()
   {
@@ -19,28 +21,41 @@ final class Client
     );
     $this->api = new SpotifyWebAPI;
 
+    $this->login();
+  }
+
+  /**
+   * @return void
+   */
+  private function login(): void
+  {
 //    $this->printAuthUrl();
 
 //    $this->initNewTokens();
 
-    $tokens = $this->getTokens();
-    $accessToken = $tokens['accessToken'] ?? null;
-    $refreshToken = $tokens['refreshToken'] ?? null;
+    if (empty($tokens)) {
+      $this->tokens = $this->getTokens();
+    }
 
-    if ($accessToken) {
+    $accessToken = $this->tokens['accessToken'] ?? null;
+    $refreshToken = $this->tokens['refreshToken'] ?? null;
+    $tokenExpiration = $this->tokens['tokenExpiration'] ?? null;
+
+    if ($accessToken || $tokenExpiration > time()) { // If we have a token, and it's not expired, use it
       $this->session->setAccessToken($accessToken);
       $this->session->setRefreshToken($refreshToken);
     }
     else {
-      $this->session->requestAccessToken($refreshToken);
-      $this->setTokens($this->session->getAccessToken(), $this->session->getRefreshToken());
+      $this->session->refreshAccessToken($refreshToken);
+      if (!$this->setTokens($this->session->getAccessToken(), $this->session->getRefreshToken(), $this->session->getTokenExpiration())) { // Try one more time on failure
+        sleep(1); // Wait a second, before try again
+        $this->setTokens($this->session->getAccessToken(), $this->session->getRefreshToken(), $this->session->getTokenExpiration());
+      }
+
+      $this->tokens = $this->getTokens(); // Update tokens
     }
 
     $this->api->setAccessToken($this->session->getAccessToken());
-
-//    print_r($this->api->getTrack('4uLU6hMCjMI75M1A2tKUQC'));
-//      print_r($this->api->getMyCurrentPlaybackInfo());
-//      print_r($this->api->me());
   }
 
   /**
@@ -78,11 +93,12 @@ final class Client
    * Set the current access and refresh tokens to a json file.
    * @param string $accessToken
    * @param string $refreshToken
+   * @param int $tokenExpiration
    * @return bool Success status
    */
-  private function setTokens(string $accessToken, string $refreshToken): bool
+  private function setTokens(string $accessToken, string $refreshToken, int $tokenExpiration): bool
   {
-    $json = array('accessToken' => $accessToken, 'refreshToken' => $refreshToken);
+    $json = array('accessToken' => $accessToken, 'refreshToken' => $refreshToken, 'tokenExpiration' => $tokenExpiration);
 
     return (bool)file_put_contents(__DIR__ . '/../../../spotify-tokens.json', json_encode($json));
   }
@@ -92,10 +108,14 @@ final class Client
    */
   public function getCurrentlyPlayingTrack(): object
   {
-    $currentlyPlayingTrackData = $this->api->getMyCurrentTrack();
+    try {
+      $getCurrentlyPlayingTrack = $this->api->getMyCurrentTrack();
+    }
+    catch (SpotifyWebAPIAuthException $e) {
+      $this->login();
+      $getCurrentlyPlayingTrack = $this->api->getMyCurrentTrack();
+    }
 
-//    print_r((array)$currentlyPlayingTrackData);
-
-    return $currentlyPlayingTrackData;
+    return $getCurrentlyPlayingTrack;
   }
 }
