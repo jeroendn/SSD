@@ -12,9 +12,9 @@ $playbackState = $spotifyClient->getCurrentlyPlayingTrack();
   <?= $playbackState->item->name ?><br>
   <?= $playbackState->item->album->name ?><br>
   <?= $playbackState->item->artists[0]->name ?><br>
-  <?= $playbackState->item->duration_ms ?>
-  <progress id="spotify-player-progress-bar" max="<?= $playbackState->item->duration_ms ?>" value="<?= $playbackState->progress_ms ?>"> 70% </progress>
   <?= $playbackState->progress_ms ?>
+  <progress id="spotify-player-progress-bar" max="<?= $playbackState->item->duration_ms ?>" value="<?= $playbackState->progress_ms ?>"> 70% </progress>
+  <?= $playbackState->item->duration_ms ?>
   <br>
   <img src="<?= $playbackState->item->album->images[2]->url ?>">
 </div>
