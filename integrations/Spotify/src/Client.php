@@ -34,14 +34,14 @@ final class Client
 //    $this->initNewTokens();
 
     if (empty($tokens)) {
-      $this->tokens = $this->getTokens();
+      $this->tokens = $this->getTokens(); // TODO Find a way were we don't request the tokens at every ajax request
     }
 
     $accessToken = $this->tokens['accessToken'] ?? null;
     $refreshToken = $this->tokens['refreshToken'] ?? null;
     $tokenExpiration = $this->tokens['tokenExpiration'] ?? null;
 
-    if ($accessToken || $tokenExpiration > time()) { // If we have a token, and it's not expired, use it
+    if ($accessToken && $tokenExpiration > time()) { // If we have a token, and it's not expired, use it
       $this->session->setAccessToken($accessToken);
       $this->session->setRefreshToken($refreshToken);
     }
@@ -65,6 +65,7 @@ final class Client
   private function printAuthUrl(): void
   {
     print_r($this->session->getAuthorizeUrl(['scope' => ['user-read-playback-state', 'user-read-currently-playing']]));
+    die;
   }
 
   /**
@@ -104,16 +105,22 @@ final class Client
   }
 
   /**
-   * @return object
+   * @return object|null
    */
-  public function getCurrentlyPlayingTrack(): object
+  public function getCurrentlyPlayingTrack(): ?object
   {
     try {
       $getCurrentlyPlayingTrack = $this->api->getMyCurrentTrack();
     }
     catch (SpotifyWebAPIAuthException $e) {
       $this->login();
-      $getCurrentlyPlayingTrack = $this->api->getMyCurrentTrack();
+
+      try {
+        $getCurrentlyPlayingTrack = $this->api->getMyCurrentTrack();
+      }
+      catch (SpotifyWebAPIAuthException $e) {
+        return null;
+      }
     }
 
     return $getCurrentlyPlayingTrack;

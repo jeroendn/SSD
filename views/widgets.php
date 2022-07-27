@@ -7,11 +7,7 @@ require_once __DIR__ . '/../php/session.php';
 <head>
   <title>SSD Widgets</title>
   <meta name="description" content="Statistics/Status Dashboard"/>
-  <meta name="robots" content="noindex">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="/fonts/fontawesome/css/all.css">
-  <link rel="stylesheet" href="/css/style.css">
+  <?php require_once __DIR__ . '/elements/head.php' ?>
 </head>
 
 <body>

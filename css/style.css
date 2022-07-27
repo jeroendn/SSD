@@ -99,6 +99,7 @@ p {
   width: 100%;
   height: 100%;
   padding: 3px;
+  box-sizing: border-box;
 }
 
 .widget.spotify-widget#widget-spotify-player .widget-body .banner-and-names {
@@ -109,7 +110,7 @@ p {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  width: 74px;
+  width: 64px;
 }
 
 .widget.spotify-widget#widget-spotify-player .widget-body .banner-and-names .names {
@@ -121,8 +122,26 @@ p {
   margin: 0 0 5px 0;
   font-weight: bold;
   font-family: "Netflix Sans Bold", sans-serif;
+  font-size: 15px;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.widget.spotify-widget#widget-spotify-player .widget-body .progress-bar .durations {
+  display: flex;
+  justify-content: space-between;
+}
+
+.widget.spotify-widget#widget-spotify-player .widget-body .progress-bar progress {
+  display: block;
+  width: 100%;
+  height: 8px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.widget.spotify-widget#widget-spotify-player .widget-body .progress-bar progress::-webkit-progress-value {
+  background-color: #1ed760;
 }
 
 .widget.steam-widget {

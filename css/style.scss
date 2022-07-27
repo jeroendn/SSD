@@ -96,13 +96,14 @@ p {
         width: 100%;
         height: 100%;
         padding: 3px;
+        box-sizing: border-box;
 
         .banner-and-names {
           display: flex;
 
           img {
             height: max-content;
-            width: 74px;
+            width: 64px;
           }
 
           .names {
@@ -113,8 +114,28 @@ p {
               margin: 0 0 5px 0;
               font-weight: bold;
               font-family: 'Netflix Sans Bold', sans-serif;
+              font-size: 15px;
               white-space: nowrap;
               overflow: hidden;
+            }
+          }
+        }
+
+        .progress-bar {
+          .durations {
+            display: flex;
+            justify-content: space-between;
+          }
+
+          progress {
+            display: block;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            overflow: hidden;
+
+            &::-webkit-progress-value {
+              background-color: #1ed760;
             }
           }
         }
