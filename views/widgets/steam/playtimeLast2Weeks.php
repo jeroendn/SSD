@@ -5,7 +5,7 @@ use SSD\Integrations\Steam\Steam;
 $steam = new Steam;
 ?>
 
-<div id="widget-steam-playtime-last-2-weeks" class="widget steam-widget" refresh-rate="60000">
+<div id="widget-steam-playtime-last-2-weeks" class="widget steam-widget" refresh-rate="120000">
   <div class="widget-heading">
     <p class="widget-title">Playtime last 2 weeks</p>
   </div>
