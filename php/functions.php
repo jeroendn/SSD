@@ -32,20 +32,39 @@ function dd(mixed $var): void
  * Does not work on multidimensional arrays.
  * @param array $array
  * @param string $property
- * @param bool $reverse
+ * @param bool $asc
  * @return void
  */
-function sortArrayByProperty(array &$array, string $property, bool $reverse = false): void
+function sortArrayByProperty(array &$array, string $property, bool $asc = true): void
 {
-  if ($reverse) {
+  if ($asc) {
     usort($array, function ($a, $b) use ($property) {
-      return $b->$property <=> $a->$property;
+      return $a->$property <=> $b->$property;
     });
   }
   else {
     usort($array, function ($a, $b) use ($property) {
-      return $a->$property <=> $b->$property;
+      return $b->$property <=> $a->$property;
     });
+  }
+}
+
+/**
+ * Sort an array of objects by multiple properties of the object.
+ * Does not work on multidimensional arrays.
+ * @param array $array
+ * @param string[] $properties
+ * @param bool $asc
+ * @return void
+ */
+function sortArrayByProperties(array &$array, array $properties, bool $asc = true): void
+{
+  foreach ($properties as $index => $property) {
+    if (!is_string($property)) {
+      continue; // Do not allow non-string properties
+    }
+
+    sortArrayByProperty($array, $property, $asc);
   }
 }
 

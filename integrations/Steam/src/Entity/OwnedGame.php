@@ -57,13 +57,14 @@ class OwnedGame extends SteamEntity
   }
 
   /**
-   * @param bool $inHours Hours will be rounded.
-   * @return int
+   * @param bool $inHours
+   * @param int $precision
+   * @return int|float
    */
-  public function getPlaytime2Weeks(bool $inHours = false): int
+  public function getPlaytime2Weeks(bool $inHours = false, int $precision = 0): int|float
   {
     if ($inHours) {
-      return round($this->playtime2Weeks / 60);
+      return number_format($this->playtime2Weeks / 60, $precision);
     }
 
     return $this->playtime2Weeks;

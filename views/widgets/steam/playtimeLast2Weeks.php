@@ -1,5 +1,9 @@
 <?php
+/**
+ * @var OwnedGame $game
+ */
 
+use SSD\Integrations\Steam\Entity\OwnedGame;
 use SSD\Integrations\Steam\Steam;
 
 $steam = new Steam;
@@ -14,7 +18,7 @@ $steam = new Steam;
     <?php foreach ($games as $game): ?>
       <div class="game">
         <img src="https://media.steampowered.com/steamcommunity/public/images/apps/<?= $game->appId ?>/<?= $game->imgIconUrl ?>.jpg">
-        <p><?= $game->name ?><span>&nbsp;<?= $game->getPlaytime2Weeks(true) ?> Hrs</span></p>
+        <p><?= $game->name ?><span>&nbsp;<?= $game->getPlaytime2Weeks(true, 1) ?> Hrs</span></p>
       </div>
     <?php endforeach; ?>
   </div>

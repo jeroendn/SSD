@@ -35,7 +35,7 @@ final class Steam
         break;
     }
 
-    sortArrayByProperty($games, $playtimePlatform, true);
+    sortArrayByProperty($games, $playtimePlatform, false);
 
     $topTenGames = [];
 
@@ -46,15 +46,22 @@ final class Steam
     return $topTenGames;
   }
 
+  /**
+   * @return OwnedGame[]
+   */
   public function getTop10PlayedGamesLast2Weeks(): array
   {
     $games = $this->client->getOwnedGames();
 
-    sortArrayByProperty($games, 'playtime2Weeks', true);
+    sortArrayByProperty($games, 'playtime2Weeks', false);
 
     $topTenGames = [];
 
     for ($i = 0; $i < 10; $i++) {
+      if ($games[$i]->playtime2Weeks == 0) { // Do not show games with 0 playtime
+        continue;
+      }
+
       $topTenGames[] = $games[$i];
     }
 
