@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "015b9a63a9c297a5584f60f48bce98fb",
+    "content-hash": "00fdca7eb6fe32ca005f3e1faf657be2",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -330,17 +330,17 @@
             "time": "2022-06-20T21:43:11+00:00"
         },
         {
-            "name": "jeroendn/php-js-console-logger",
-            "version": "v1.0.1",
+            "name": "jeroendn/php-helpers",
+            "version": "v0.2-beta",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jeroendn/php-js-console-logger.git",
-                "reference": "ca1f9fc0b9f64baacbacb5f08fcb2da0d1e21a8f"
+                "url": "https://github.com/jeroendn/PhpHelpers.git",
+                "reference": "e969415a593d51d5167c2c5efb59383ae325e04d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jeroendn/php-js-console-logger/zipball/ca1f9fc0b9f64baacbacb5f08fcb2da0d1e21a8f",
-                "reference": "ca1f9fc0b9f64baacbacb5f08fcb2da0d1e21a8f",
+                "url": "https://api.github.com/repos/jeroendn/PhpHelpers/zipball/e969415a593d51d5167c2c5efb59383ae325e04d",
+                "reference": "e969415a593d51d5167c2c5efb59383ae325e04d",
                 "shasum": ""
             },
             "require": {
@@ -353,8 +353,51 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "jeroendn\\PhpJsConsoleLogger\\": "src",
-                    "jeroendn\\PhpJsConsoleLogger\\Exceptions\\": "src"
+                    "jeroendn\\PhpHelpers\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeroen de Nijs",
+                    "email": "info@jeroendn.nl"
+                }
+            ],
+            "description": "A package containing some usefull functions within classes.",
+            "support": {
+                "issues": "https://github.com/jeroendn/PhpHelpers/issues",
+                "source": "https://github.com/jeroendn/PhpHelpers/tree/v0.2-beta"
+            },
+            "time": "2022-09-10T08:35:16+00:00"
+        },
+        {
+            "name": "jeroendn/php-js-console-logger",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeroendn/php-js-console-logger.git",
+                "reference": "62391cb1e9426c1b0c6db27b09f4eb781ff713a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeroendn/php-js-console-logger/zipball/62391cb1e9426c1b0c6db27b09f4eb781ff713a1",
+                "reference": "62391cb1e9426c1b0c6db27b09f4eb781ff713a1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "jeroendn\\PhpJsConsoleLogger\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -370,9 +413,9 @@
             "description": "A simple way to create javascript console logs via a php function.",
             "support": {
                 "issues": "https://github.com/jeroendn/php-js-console-logger/issues",
-                "source": "https://github.com/jeroendn/php-js-console-logger/tree/v1.0.1"
+                "source": "https://github.com/jeroendn/php-js-console-logger/tree/v1.0.2"
             },
-            "time": "2021-10-10T09:50:46+00:00"
+            "time": "2022-09-08T13:55:43+00:00"
         },
         {
             "name": "jwilsson/spotify-web-api-php",
@@ -699,7 +742,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "jeroendn/php-helpers": 10
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
