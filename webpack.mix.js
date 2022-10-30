@@ -1,4 +1,4 @@
-let mix = require('webpack-mix');
+let mix = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
