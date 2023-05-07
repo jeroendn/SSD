@@ -5,7 +5,18 @@
  */
 function authorized(): bool
 {
-  return (isset($_GET[URL_SECRET_KEY]) && $_GET[URL_SECRET_KEY] === URL_SECRET_VALUE);
+    return (isset($_GET[URL_SECRET_KEY]) && $_GET[URL_SECRET_KEY] === URL_SECRET_VALUE);
+}
+
+/**
+ * Returns the current URL query secret.
+ * @return string
+ */
+function getSecretQuery(): string
+{
+    $value = $_GET[URL_SECRET_KEY];
+
+    return '?' . URL_SECRET_KEY . '=' . $value;
 }
 
 /**
@@ -14,7 +25,7 @@ function authorized(): bool
  */
 function h(string $string): string
 {
-  return htmlspecialchars($string);
+    return htmlspecialchars($string);
 }
 
 /**
@@ -23,8 +34,8 @@ function h(string $string): string
  */
 function dd(mixed $var): void
 {
-  var_dump($var);
-  die;
+    var_dump($var);
+    die;
 }
 
 /**
@@ -34,5 +45,5 @@ function dd(mixed $var): void
  */
 function getWidget(string $integration, string $widgetName): void
 {
-  include __DIR__ . '/../views/widgets/' . strtolower($integration) . '/' . $widgetName . '.php';
+    include __DIR__ . '/../views/widgets/' . strtolower($integration) . '/' . $widgetName . '.php';
 }

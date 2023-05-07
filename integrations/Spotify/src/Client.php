@@ -110,19 +110,19 @@ final class Client
   public function getCurrentlyPlayingTrack(): ?object
   {
     try {
-      $getCurrentlyPlayingTrack = $this->api->getMyCurrentTrack();
+      $currentlyPlayingTrack = $this->api->getMyCurrentTrack();
     }
     catch (SpotifyWebAPIAuthException $e) {
       $this->login();
 
       try {
-        $getCurrentlyPlayingTrack = $this->api->getMyCurrentTrack();
+          $currentlyPlayingTrack = $this->api->getMyCurrentTrack();
       }
       catch (SpotifyWebAPIAuthException $e) {
         return null;
       }
     }
 
-    return $getCurrentlyPlayingTrack;
+    return $currentlyPlayingTrack;
   }
 }

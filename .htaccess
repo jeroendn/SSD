@@ -15,6 +15,7 @@ RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php
 
 RewriteRule ^$ views/dashboard.php
+RewriteRule ^dashboard$ views/dashboard.php
 RewriteRule ^widgets$ views/widgets.php
 RewriteRule ^widget$ views/widgets/ajaxWidget.php
 

@@ -37,7 +37,7 @@ $playbackState = $spotify->getCurrentlyPlayingTrack();
       </div>
       <div class="progress-bar">
         <div class="durations">
-          <span class="current-duration" duration="<?= $playbackState->progress_ms ?>"><?= SpotifyHelper::msToReadableString($playbackState->progress_ms) ?></span>
+          <span class="current-duration" duration="<?= $playbackState->progress_ms ?>" total-duration="<?= $playbackState->item->duration_ms ?>"><?= SpotifyHelper::msToReadableString($playbackState->progress_ms) ?></span>
           <span class="total-duration"><?= SpotifyHelper::msToReadableString($playbackState->item->duration_ms) ?></span>
         </div>
         <progress id="spotify-player-progress-bar" max="<?= $playbackState->item->duration_ms ?>" value="<?= $playbackState->progress_ms ?>"></progress>
