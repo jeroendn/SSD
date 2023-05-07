@@ -12,7 +12,7 @@ $playbackState = $spotify->getCurrentlyPlayingTrack();
 
   <div id="widget-spotify-player" class="widget spotify-widget auto-refresh" refresh-rate="5000" style="background-image: url(<?= $playbackState->item->album->images[0]->url ?>)">
     <div class="widget-heading">
-      <p class="widget-title">Now playing</p>
+      <p class="widget-title">Spotify</p>
     </div>
     <div class="widget-body">
       <div class="banner-and-names">

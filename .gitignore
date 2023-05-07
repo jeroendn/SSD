@@ -1,5 +1,5 @@
 .idea/
 vendor/
 node_modules/
+config/
 config.php
-spotify-tokens.json

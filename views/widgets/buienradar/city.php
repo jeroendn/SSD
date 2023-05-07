@@ -1,0 +1,1 @@
+<iframe src="https://gadgets.buienradar.nl/gadget/zoommap/?lat=52.03333&lng=5.65833&overname=2&zoom=13&naam=ede&size=2b&voor=1" scrolling=no width=330 height=330 frameborder=no></iframe>

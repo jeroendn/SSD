@@ -87,7 +87,7 @@ final class Client
    */
   private function getTokens(): mixed
   {
-    return json_decode(file_get_contents(__DIR__ . '/../../../spotify-tokens.json'), true);
+    return json_decode(file_get_contents(__DIR__ . '/../../../config/spotify-tokens.json'), true);
   }
 
   /**
@@ -101,7 +101,7 @@ final class Client
   {
     $json = array('accessToken' => $accessToken, 'refreshToken' => $refreshToken, 'tokenExpiration' => $tokenExpiration);
 
-    return (bool)file_put_contents(__DIR__ . '/../../../spotify-tokens.json', json_encode($json));
+    return (bool)file_put_contents(__DIR__ . '/../../../config/spotify-tokens.json', json_encode($json));
   }
 
   /**

@@ -15,21 +15,29 @@ require_once __DIR__ . '/../php/session.php';
 <main>
 
   <div class="grid-group-vertical">
-    <div class="grid-item grid-item-1-1">
+    <div class="grid-item grid-item-2-1">
       <?php getWidget('steam', 'profileStatus'); ?>
     </div>
 
-    <div class="grid-item grid-item-1-1">
+    <div class="grid-item grid-item-2-2">
       <?php getWidget('steam', 'playtimeLast2Weeks'); ?>
     </div>
   </div>
 
-  <div class="grid-item grid-item-1-2">
+  <div class="grid-item grid-item-2-3">
     <?php getWidget('steam', 'top10PlayedGames'); ?>
   </div>
 
-  <div class="grid-item grid-item-1-1">
+  <div class="grid-item grid-item-2-1">
     <?php getWidget('spotify', 'player'); ?>
+  </div>
+
+  <div class="grid-item grid-item-2-2">
+    <?php getWidget('buienradar', 'country'); ?>
+  </div>
+
+  <div class="grid-item grid-item-2-2">
+    <?php getWidget('buienradar', 'city'); ?>
   </div>
 
 </main>

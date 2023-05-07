@@ -14,8 +14,8 @@
 }
 
 :root {
-  --grid-item-width: 274.2px;
-  --grid-item-height: 200px;
+  --grid-item-width: 137.1px;
+  --grid-item-height: 137.1px;
 }
 
 body {
@@ -50,11 +50,6 @@ p {
     height: var(--grid-item-height);
   }
 
-  &.grid-item-1-2 {
-    width: var(--grid-item-width);
-    height: calc(var(--grid-item-height) * 2);
-  }
-
   &.grid-item-2-1 {
     width: calc(var(--grid-item-width) * 2);
     height: var(--grid-item-height);
@@ -63,6 +58,21 @@ p {
   &.grid-item-2-2 {
     width: calc(var(--grid-item-width) * 2);
     height: calc(var(--grid-item-height) * 2);
+  }
+
+  &.grid-item-2-3 {
+    width: calc(var(--grid-item-width) * 2);
+    height: calc(var(--grid-item-height) * 3);
+  }
+
+  &.grid-item-3-2 {
+    width: calc(var(--grid-item-width) * 3);
+    height: calc(var(--grid-item-height) * 2);
+  }
+
+  &.grid-item-3-3 {
+    width: calc(var(--grid-item-width) * 3);
+    height: calc(var(--grid-item-height) * 3);
   }
 }
 
