@@ -13,8 +13,8 @@ final class Client
   private string $steamId;
   private string $baseUrl = 'https://api.steampowered.com/';
 
-  private string $urlGetOwnedGames = 'IPlayerService/GetOwnedGames/v0001/';
-  private string $urlGetPlayerSummaries = 'ISteamUser/GetPlayerSummaries/v0002/';
+  private string $urlGetOwnedGames = 'IPlayerService/GetOwnedGames/v1/';
+  private string $urlGetPlayerSummaries = 'ISteamUser/GetPlayerSummaries/v2/';
 
   public function __construct()
   {
