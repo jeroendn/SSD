@@ -22,11 +22,7 @@ require_once __DIR__ . '/../php/session.php';
             <?php getWidget('steam', 'profileStatus'); ?>
         </div>
 
-        <div class="grid-item grid-item-2-2">
-            <?php getWidget('steam', 'playtimeLast2Weeks'); ?>
-        </div>
-
-        <div class="grid-item grid-item-2-1"></div>
+        <div class="grid-item grid-item-2-3"></div>
 
         <div class="grid-item grid-item-2-2">
             <?php getWidget('buienradar', 'country'); ?>
@@ -34,6 +30,14 @@ require_once __DIR__ . '/../php/session.php';
 
         <div class="grid-item grid-item-2-2">
             <?php getWidget('buienradar', 'city'); ?>
+        </div>
+
+    </div>
+
+    <div class="grid-group-vertical">
+
+        <div class="grid-item grid-item-2-3">
+            <?php getWidget('steam', 'playtimeLast2Weeks'); ?>
         </div>
 
     </div>

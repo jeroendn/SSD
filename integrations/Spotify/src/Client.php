@@ -17,7 +17,7 @@ final class Client
     $this->session = new Session(
       API_SPOTIFY_CLIENT_ID,
       API_SPOTIFY_CLIENT_SECRET,
-      'https://dramuga.jeroendn.nl' // Must match redirectUri in Spotify application dashboard
+      'https://zeta.jeroendn.nl' // Must match redirectUri in Spotify application dashboard
     );
     $this->api = new SpotifyWebAPI;
 
