@@ -3,3 +3,6 @@ vendor/
 node_modules/
 config/
 config.php
+
+caddy_config/
+caddy_data/

@@ -1,0 +1,15 @@
+localhost:8000 {
+  root * /srv
+  file_server
+  php_fastcgi php:9000
+  tls internal
+}
+
+zeta.jeroendn.nl {
+  root * /srv
+  file_server
+  php_fastcgi php:9000
+  tls {
+    on_demand
+  }
+}

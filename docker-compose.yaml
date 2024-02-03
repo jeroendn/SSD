@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  php:
+    image: php:8.3-fpm
+    container_name: php_ssd
+    restart: unless-stopped
+    volumes:
+      - ./:/srv
+    networks:
+      - net
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: caddy_ssd
+    restart: unless-stopped
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./:/srv
+      - ./data:/data
+      - ./caddy_config:/config
+    ports:
+      - "8000:8000"
+    networks:
+      - net
+
+networks:
+  net:
