@@ -1,7 +1,8 @@
 test.local {
     root * /apps/ssd
-	php_fastcgi app1:9000 {
+	php_fastcgi ssd:9000 {
         root /var/www/html
     }
-    file_server
+
+    # TODO Convert .htaccess
 }

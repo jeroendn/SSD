@@ -1,9 +1,10 @@
-version: '3'
+version: '3.8'
+
 services:
-  php-fpm:
-    hostname: app1
+  php_ssd:
+    hostname: ssd
     image: php:8.3-fpm
-    container_name: php-fpm
+    container_name: php_ssd
     restart: always
     volumes:
       - ./:/var/www/html
@@ -11,6 +12,7 @@ services:
       - servercaddy_net
     ports:
       - "9000:9000"
+
 networks:
   servercaddy_net:
     external: true
