@@ -1,4 +1,4 @@
-test.local {
+zeta.jeroendn.nl ssd.local {
     root * /apps/ssd
 	php_fastcgi ssd:9000 {
         root /var/www/html

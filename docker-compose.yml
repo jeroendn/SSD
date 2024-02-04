@@ -5,14 +5,14 @@ services:
     hostname: ssd
     image: php:8.3-fpm
     container_name: php_ssd
-    restart: always
+    restart: unless-stopped
     volumes:
       - ./:/var/www/html
     networks:
-      - servercaddy_net
+      - caddy_net
     ports:
       - "9000:9000"
 
 networks:
-  servercaddy_net:
+  caddy_net: # TODO Make network name hardcoded
     external: true
