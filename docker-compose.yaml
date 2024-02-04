@@ -1,28 +1,16 @@
-version: '3.8'
-
+version: '3'
 services:
-  php:
+  php-fpm:
+    hostname: app1
     image: php:8.3-fpm
-    container_name: php_ssd
-    restart: unless-stopped
+    container_name: php-fpm
+    restart: always
     volumes:
-      - ./:/srv
+      - ./:/var/www/html
     networks:
-      - net
-
-  caddy:
-    image: caddy:2-alpine
-    container_name: caddy_ssd
-    restart: unless-stopped
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./:/srv
-      - ./data:/data
-      - ./caddy_config:/config
+      - servercaddy_net
     ports:
-      - "8000:8000"
-    networks:
-      - net
-
+      - "9000:9000"
 networks:
-  net:
+  servercaddy_net:
+    external: true
