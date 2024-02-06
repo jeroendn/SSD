@@ -3,7 +3,7 @@ version: '3.8'
 services:
   php_ssd:
     hostname: ssd
-    image: php:8.3-fpm
+    image: php:8.3-fpm-alpine
     container_name: php_ssd
     restart: unless-stopped
     volumes:
@@ -14,5 +14,5 @@ services:
       - "9000:9000"
 
 networks:
-  caddy_net: # TODO Make network name hardcoded
+  caddy_net:
     external: true
