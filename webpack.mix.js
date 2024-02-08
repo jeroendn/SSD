@@ -1,4 +1,4 @@
 let mix = require('laravel-mix');
 
-mix.sass('css/style.scss', 'css/style.css')
+mix.sass('scss/style.scss', 'public/css/style.css')
     .sourceMaps(true, 'source-map');
