@@ -1,4 +1,4 @@
-(defaults) {
+(defaults_ssd) {
     root * /apps/ssd
 	php_fastcgi ssd:9000 {
         root /var/www/html
@@ -17,7 +17,7 @@
 }
 
 zeta.jeroendn.nl {
-    import defaults
+    import defaults_ssd
 
     tls {
         on_demand
@@ -25,7 +25,7 @@ zeta.jeroendn.nl {
 }
 
 ssd.local {
-    import defaults
+    import defaults_ssd
 
     tls internal {
         on_demand
