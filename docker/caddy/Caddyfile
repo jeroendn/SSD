@@ -18,10 +18,16 @@
 
 zeta.jeroendn.nl {
     import defaults
+
+    tls {
+        on_demand
+    }
 }
 
 ssd.local {
     import defaults
 
-    tls internal
+    tls internal {
+        on_demand
+    }
 }
