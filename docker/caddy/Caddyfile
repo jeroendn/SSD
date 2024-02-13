@@ -5,6 +5,8 @@
         try_files views/{path}.php = 404
     }
 
+    rewrite / /dashboard
+
     # Serve static files
     file_server {
         root /apps/ssd/public
