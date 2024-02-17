@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  php_ssd:
+    hostname: ssd
+    image: php:8.3-fpm-alpine
+    container_name: php_ssd
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - caddy_net
+    ports:
+      - "${HTTP_PORT}:9000"
+
+networks:
+  caddy_net:
+    external: true

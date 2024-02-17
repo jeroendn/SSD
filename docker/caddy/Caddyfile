@@ -1,0 +1,35 @@
+(defaults_ssd) {
+    root * /apps/ssd
+	php_fastcgi ssd:9000 {
+        root /var/www/html
+        try_files views/{path}.php = 404
+    }
+
+    rewrite / /dashboard
+
+    # Serve static files
+    file_server {
+        root /apps/ssd/public
+    }
+
+    handle_errors {
+    	rewrite * /views/404.php
+    	file_server
+    }
+}
+
+zeta.jeroendn.nl {
+    import defaults_ssd
+
+    tls {
+        on_demand
+    }
+}
+
+ssd.local {
+    import defaults_ssd
+
+    tls internal {
+        on_demand
+    }
+}

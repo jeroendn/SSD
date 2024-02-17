@@ -14,7 +14,7 @@ async function autoRefreshWidget(integration, widgetName, refreshRate) {
       let widgetNameCamelized = camelize(widgetName);
 
       $.ajax({
-        url: '/widget?huts=HUTS&integration=' + integration + '&widget=' + widgetNameCamelized,
+        url: '/widgets/ajaxWidget?huts=HUTS&integration=' + integration + '&widget=' + widgetNameCamelized,
       }).done(function (data) {
         if (data.error !== undefined) {
           console.log(data.error);
