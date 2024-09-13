@@ -50,6 +50,10 @@ require_once __DIR__ . '/../php/session.php';
         <?php getWidget('spotify', 'player'); ?>
     </div>
 
+    <div class="grid-item grid-item-4-1">
+        <?php getWidget('uptimerobot', 'monitors'); ?>
+    </div>
+
 </main>
 
 <?php require_once __DIR__ . '/elements/js.php'; ?>

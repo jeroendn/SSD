@@ -2,7 +2,7 @@
 
 namespace SSD\Integrations\Steam;
 
-use jeroendn\PhpHelpers\ArrayHelper;
+use jeroendn\PhpHelpers\Helper\ArrayHelper;
 use SSD\Integrations\Steam\Entity\OwnedGame;
 
 final class Steam
@@ -36,7 +36,7 @@ final class Steam
         break;
     }
 
-    ArrayHelper::sortArrayByProperty($games, $playtimePlatform, false);
+    ArrayHelper::sortByProperty($games, $playtimePlatform, false);
 
     $topTenGames = [];
 
@@ -54,7 +54,7 @@ final class Steam
   {
     $games = $this->client->getOwnedGames();
 
-    ArrayHelper::sortArrayByProperty($games, 'playtime2Weeks', false);
+    ArrayHelper::sortByProperty($games, 'playtime2Weeks', false);
 
     $topTenGames = [];
 

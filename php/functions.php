@@ -29,16 +29,6 @@ function h(string $string): string
 }
 
 /**
- * @param mixed $var
- * @return void
- */
-function dd(mixed $var): void
-{
-    var_dump($var);
-    die;
-}
-
-/**
  * @param string $integration
  * @param string $widgetName
  * @return void

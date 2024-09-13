@@ -8,6 +8,7 @@ const API_SPOTIFY_CLIENT_ID = '';
 const API_SPOTIFY_CLIENT_SECRET = '';
 const API_KEY_STEAM = '';
 const API_STEAM_ID = '';
+const API_KEY_UPTIME_ROBOT_READ_ONLY = '';
 
 // Database
 //const DB_SERVERNAME = 'web0098.zxcs.nl';
