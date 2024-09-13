@@ -13,8 +13,12 @@ final class UptimeRobot
 
     public function getMonitors(): array
     {
-        $monitors = $this->client->getMonitors();
+        $monitors = $this->client->getMonitors()['monitors'] ?? [];
 
-        return $monitors['monitors'] ?? [];
+        usort($monitors, function ($a, $b) {
+            return $b['logs'][0]['reason']['code'] <=> $a['logs'][0]['reason']['code'];
+        });
+
+        return $monitors;
     }
 }

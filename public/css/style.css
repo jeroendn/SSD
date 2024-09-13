@@ -66,6 +66,10 @@ p {
   width: calc(var(--grid-item-width) * 3);
   height: calc(var(--grid-item-height) * 3);
 }
+.grid-item.grid-item-2-4 {
+  width: calc(var(--grid-item-width) * 2);
+  height: calc(var(--grid-item-height) * 4);
+}
 
 .widget {
   position: relative;
@@ -77,6 +81,10 @@ p {
   font-family: "Netflix Sans Bold", sans-serif;
   margin: 0;
   padding: 3px;
+}
+.widget .widget-body p {
+  font-size: 14px;
+  margin-bottom: 0;
 }
 .widget.spotify-widget {
   background-color: #333;
@@ -163,7 +171,45 @@ p {
   font-weight: bold;
   font-family: "Netflix Sans Bold", sans-serif;
 }
-
+.widget.uptimerobot-widget {
+  background-color: #333;
+}
+.widget.uptimerobot-widget .widget-heading .widget-title {
+  background-color: #3bd671;
+}
+@keyframes blink-error-status {
+  0% {
+    background-color: unset;
+  }
+  50% {
+    background-color: red;
+  }
+  100% {
+    background-color: unset;
+  }
+}
+.widget.uptimerobot-widget .widget-body .website-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 3px;
+  cursor: pointer;
+}
+.widget.uptimerobot-widget .widget-body .website-wrapper .status {
+  padding: 1px 4px;
+  border-radius: 10px;
+}
+.widget.uptimerobot-widget .widget-body .website-wrapper.success .status {
+  background-color: green;
+}
+.widget.uptimerobot-widget .widget-body .website-wrapper.warning .status {
+  background-color: orange;
+}
+.widget.uptimerobot-widget .widget-body .website-wrapper.error {
+  animation: blink-error-status 2s ease-in-out infinite;
+}
+.widget.uptimerobot-widget .widget-body .website-wrapper.error .status {
+  background-color: red;
+}
 nav#hidden-nav {
   position: fixed;
   top: 0;

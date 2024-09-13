@@ -12,9 +12,19 @@ $uptimeRobot = new UptimeRobot();
     <div class="widget-body">
         <?php $monitors = $uptimeRobot->getMonitors(); ?>
         <?php foreach ($monitors as $monitor): ?>
-            <div class="">
-                <p><?= $monitor['friendly_name'] ?></p>
-                <p><?= $monitor['logs'][0]['reason']['code'] ?></p>
+            <?php
+            $httpCode    = $monitor['logs'][0]['reason']['code'];
+            $firstChar   = $httpCode[0];
+            $statusClass = match ($firstChar) {
+                '2'      => 'success',
+                '3'      => 'warning',
+                '4', '5' => 'error',
+                default  => null
+            }
+            ?>
+            <div class="website-wrapper <?= $statusClass ?>" onclick="window.open('<?= $monitor['url'] ?>', '_blank')">
+                <p class="status"><?= $monitor['logs'][0]['reason']['code'] ?></p>
+                <p class="name"><?= $monitor['friendly_name'] ?></p>
             </div>
         <?php endforeach; ?>
     </div>

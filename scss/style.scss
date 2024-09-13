@@ -74,6 +74,11 @@ p {
     width: calc(var(--grid-item-width) * 3);
     height: calc(var(--grid-item-height) * 3);
   }
+
+  &.grid-item-2-4 {
+    width: calc(var(--grid-item-width) * 2);
+    height: calc(var(--grid-item-height) * 4);
+  }
 }
 
 .widget {
@@ -86,6 +91,13 @@ p {
     font-family: 'Netflix Sans Bold', sans-serif;
     margin: 0;
     padding: 3px;
+  }
+
+  .widget-body {
+    p {
+      font-size: 14px;
+      margin-bottom: 0;
+    }
   }
 
   &.spotify-widget {
@@ -188,6 +200,60 @@ p {
           white-space: nowrap;
           font-weight: bold;
           font-family: 'Netflix Sans Bold', sans-serif;
+        }
+      }
+    }
+  }
+
+  &.uptimerobot-widget {
+    background-color: #333;
+
+    .widget-heading .widget-title {
+      background-color: #3bd671;
+    }
+
+    .widget-body {
+      @keyframes blink-error-status {
+        0% {
+          background-color: unset;
+        }
+        50% {
+          background-color: red;
+        }
+        100% {
+          background-color: unset;
+        }
+      }
+
+      .website-wrapper {
+        display: flex;
+        justify-content: space-between;
+        padding: 2px 3px;
+        cursor: pointer;
+
+        .status {
+          padding: 1px 4px;
+          border-radius: 10px;
+        }
+
+        &.success .status {
+          background-color: green;
+        }
+
+        &.warning .status {
+          background-color: orange;
+        }
+
+        &.error {
+          animation: blink-error-status 2s ease-in-out infinite;
+
+          .status {
+            background-color: red;
+          }
+        }
+
+        .name {
+
         }
       }
     }
