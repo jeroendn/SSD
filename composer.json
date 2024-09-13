@@ -18,16 +18,5 @@
     }
   },
   "prefer-stable": true,
-  "scripts": {
-    "pre-install-cmd": [
-      "npm install"
-    ],
-    "pre-update-cmd": [
-      "npm update"
-    ],
-    "post-autoload-dump": [
-      "modclean -r -n default:safe,default:caution",
-      "npx mix"
-    ]
-  }
+  "scripts": {}
 }

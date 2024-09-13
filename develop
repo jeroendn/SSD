@@ -1,0 +1,23 @@
+#!/bin/bash
+
+NC="\e[0m"
+SUCCESS="\e[32m"
+WARNING="\e[33m"
+ERROR="\e[31m"
+
+if [ "$1" == "checkout" ] || [ "$1" == "c" ]; then
+    ./develop install
+
+elif [ "$1" == "install" ]; then
+    composer install
+    npm install
+    npx modclean -r -n default:safe,default:caution
+    npx mix
+
+elif [ "$1" == "update" ]; then
+    composer update
+    npm update
+
+else
+    echo -e "${WARNING}No option specified${NC}"
+fi
