@@ -73,6 +73,14 @@ require_once __DIR__ . '/../php/session.php';
         </div>
     </div>
 
+    <h1>UptimeRobot</h1>
+
+    <div class="grid-container">
+        <div class="grid-item grid-item-2-3">
+            <?php getWidget('uptimerobot', 'monitors'); ?>
+        </div>
+    </div>
+
 </main>
 
 <?php require_once __DIR__ . '/elements/js.php'; ?>
