@@ -1,0 +1,39 @@
+#!/bin/bash
+
+NC="\e[0m"
+SUCCESS="\e[42m"
+WARNING="\e[43m"
+ERROR="\e[41m"
+
+CONTAINER_NAME="php_ssd"
+GIT_BRANCH="master"
+GIT_REMOTE="origin"
+
+if [ "$EUID" -eq 0 ]; then
+  echo -e "${ERROR}Do not run as sudo!${NC}"
+  exit
+fi
+
+echo -e "${SUCCESS}Please enter your sudo password:${NC}"
+sudo -v
+
+echo -e "${SUCCESS}Pulling latest changes${NC}"
+git reset --hard
+git checkout $GIT_BRANCH
+git fetch $GIT_REMOTE
+git pull $GIT_REMOTE $GIT_BRANCH
+
+echo -e "${SUCCESS}Setting executable permissions for scripts${NC}"
+chmod +x ./develop ./deploy
+
+echo -e "${SUCCESS}Rebuilding Docker image${NC}"
+sudo docker compose build
+
+echo -e "${SUCCESS}Restarting Docker containers${NC}"
+sudo docker compose down
+sudo docker compose up -d
+
+echo -e "${SUCCESS}Installing libraries${NC}"
+sudo docker exec -it $CONTAINER_NAME ./develop install
+
+echo -e "${SUCCESS}Deployment finished${NC}"
