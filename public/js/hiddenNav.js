@@ -4,7 +4,7 @@ $(document).ready(function () {
 
         // TODO Check if mouse is not hovering on menu
 
-        if (e.clientX <= 100) {
+        if (e.clientX <= 100 && e.clientY <= 100) {
             $('#hidden-nav').addClass('show');
         }
         else {
