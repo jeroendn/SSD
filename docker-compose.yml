@@ -7,6 +7,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./:/var/www/html
+      - ./composer.json:/var/www/html/public/composer.json # Mount composer.json to public directory for WhatIsWhere app
     networks:
       - docker_server_caddy
 
