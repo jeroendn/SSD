@@ -9,8 +9,6 @@ services:
       - ./:/var/www/html
     networks:
       - docker_server_caddy
-    ports:
-      - "${HTTP_PORT}:9000"
 
 networks:
   docker_server_caddy:
