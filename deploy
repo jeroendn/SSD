@@ -37,6 +37,6 @@ echo -e "${SUCCESS}Installing libraries${NC}"
 sudo docker exec -it $CONTAINER_NAME ./develop install
 
 # Copy composer.json to public directory for WhatIsWhere app
-cp composer.json ./public
+sudo cp composer.json ./public
 
 echo -e "${SUCCESS}Deployment finished${NC}"
