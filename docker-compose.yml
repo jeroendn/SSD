@@ -5,6 +5,8 @@ services:
     image: php_ssd:fpm-alpine
     container_name: php_ssd
     restart: unless-stopped
+    environment:
+      TZ: Europe/Amsterdam
     volumes:
       - ./:/var/www/html
     networks:
