@@ -19,5 +19,8 @@
     }
   },
   "prefer-stable": true,
-  "scripts": {}
+  "scripts": {},
+  "config": {
+    "sort-packages": true
+  }
 }
