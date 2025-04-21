@@ -87,7 +87,13 @@ final class Client
    */
   private function getTokens(): mixed
   {
-    return json_decode(file_get_contents(__DIR__ . '/../../../config/spotify-tokens.json'), true);
+    $fileContents = file_get_contents(__DIR__ . '/../../../config/spotify-tokens.json');
+
+    if (!$fileContents) {
+        return null;
+    }
+
+    return json_decode($fileContents, true);
   }
 
   /**
