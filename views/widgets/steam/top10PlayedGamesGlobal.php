@@ -11,7 +11,7 @@ $steamClient = new Client;
     </div>
     <div class="widget-body">
         <?php
-        $publicApiData = file_get_contents('https://api.steampowered.com/ISteamChartsService/GetMostPlayedGames/v1/');
+        $publicApiData = file_get_contents('https://api.steampowered.com/ISteamChartsService/GetGamesByConcurrentPlayers/v1/');
         $publicApiData = json_decode($publicApiData);
 
         $ownedGames = $steamClient->getOwnedGames();
@@ -40,7 +40,7 @@ $steamClient = new Client;
             ?>
             <div class="game">
                 <img src="<?= $appImgUrl ?>">
-                <p><?= $appName ?><span>&nbsp;<?= number_format($app->peak_in_game) ?></span></p>
+                <p><?= $appName ?><span>&nbsp;<?= number_format($app->concurrent_in_game) ?></span></p>
             </div>
         <?php endfor; ?>
     </div>
