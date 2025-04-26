@@ -151,12 +151,13 @@ p {
 }
 .widget.steam-widget .game {
   display: flex;
-  margin: 3px;
+  margin: 5px;
 }
 .widget.steam-widget .game img {
   width: 32px;
-  height: -moz-max-content;
-  height: max-content;
+  height: 32px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .widget.steam-widget .game p {
   font-size: 14px;
@@ -191,7 +192,7 @@ p {
 .widget.uptimerobot-widget .widget-body .website-wrapper {
   display: flex;
   justify-content: space-between;
-  padding: 2px 3px;
+  padding: 2px 5px;
   cursor: pointer;
 }
 .widget.uptimerobot-widget .widget-body .website-wrapper .status {

@@ -58,6 +58,14 @@ require_once __DIR__ . '/../php/session.php';
 
     </div>
 
+    <div class="grid-group-vertical">
+
+        <div class="grid-item grid-item-2-3">
+            <?php getWidget('steam', 'top10PlayedGamesGlobal'); ?>
+        </div>
+
+    </div>
+
 </main>
 
 <?php require_once __DIR__ . '/elements/js.php'; ?>
