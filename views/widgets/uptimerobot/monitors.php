@@ -20,10 +20,14 @@ $uptimeRobot = new UptimeRobot();
                 '3'      => 'warning',
                 '4', '5' => 'error',
                 default  => null
+            };
+            if ($httpCode === '99') {
+                $statusClass = 'warning';
+                $httpCode    = 'paused';
             }
             ?>
             <div class="website-wrapper <?= $statusClass ?>" onclick="window.open('<?= $monitor['url'] ?>', '_blank')">
-                <p class="status"><?= $monitor['logs'][0]['reason']['code'] ?></p>
+                <p class="status"><?= $httpCode ?></p>
                 <p class="name"><?= $monitor['friendly_name'] ?></p>
             </div>
         <?php endforeach; ?>
