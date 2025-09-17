@@ -21,7 +21,7 @@ $uptimeRobot = new UptimeRobot();
                 '4', '5' => 'error',
                 default  => null
             };
-            if ($httpCode === '99') {
+            if ($monitor['status'] === 0) {
                 $statusClass = 'warning';
                 $httpCode    = 'paused';
             }

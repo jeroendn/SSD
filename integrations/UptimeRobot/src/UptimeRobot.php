@@ -19,6 +19,13 @@ final class UptimeRobot
             return $b['logs'][0]['reason']['code'] <=> $a['logs'][0]['reason']['code'];
         });
 
+        // Sort logs by the newest first
+        foreach ($monitors as &$monitor) {
+            usort($monitor['logs'], function ($a, $b) {
+                return $b['datetime'] <=> $a['datetime'];
+            });
+        }
+
         return $monitors;
     }
 }
