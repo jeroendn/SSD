@@ -48,7 +48,7 @@ final class Client
      */
     public function getOwnedGames(): array
     {
-        $url = sprintf('%s%s?key=%s&steamid=%s&include_appinfo=1&format=json', self::BASE_URL, self::URL_GET_OWNED_GAMES, $this->apiKey, $this->steamId);
+        $url = sprintf('%s%s?key=%s&steamid=%s&include_appinfo=1&include_played_free_games=1&format=json', self::BASE_URL, self::URL_GET_OWNED_GAMES, $this->apiKey, $this->steamId);
 
         try {
             $response = (new GuzzleClient())->request('GET', $url);
