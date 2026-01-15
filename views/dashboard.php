@@ -28,13 +28,13 @@ require_once __DIR__ . '/../php/session.php';
 
         <div class="grid-item grid-item-2-1"></div>
 
-        <div class="grid-item grid-item-2-2">
-            <?php getWidget('buienradar', 'country'); ?>
-        </div>
+<!--        <div class="grid-item grid-item-2-2">-->
+<!--            --><?php //getWidget('buienradar', 'country'); ?>
+<!--        </div>-->
 
-        <div class="grid-item grid-item-2-2">
-            <?php getWidget('buienradar', 'city'); ?>
-        </div>
+<!--        <div class="grid-item grid-item-2-2">-->
+<!--            --><?php //getWidget('buienradar', 'city'); ?>
+<!--        </div>-->
 
     </div>
 
