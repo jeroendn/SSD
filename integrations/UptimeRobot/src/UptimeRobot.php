@@ -16,15 +16,8 @@ final class UptimeRobot
         $monitors = $this->client->getMonitors()['monitors'] ?? [];
 
         usort($monitors, function ($a, $b) {
-            return $b['logs'][0]['reason']['code'] <=> $a['logs'][0]['reason']['code'];
+            return $b['status'] <=> $a['status'];
         });
-
-        // Sort logs by the newest first
-        foreach ($monitors as &$monitor) {
-            usort($monitor['logs'], function ($a, $b) {
-                return $b['datetime'] <=> $a['datetime'];
-            });
-        }
 
         return $monitors;
     }

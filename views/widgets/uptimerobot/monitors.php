@@ -13,21 +13,24 @@ $uptimeRobot = new UptimeRobot();
         <?php $monitors = $uptimeRobot->getMonitors(); ?>
         <?php foreach ($monitors as $monitor): ?>
             <?php
-            $httpCode    = $monitor['logs'][0]['reason']['code'];
-            $firstChar   = $httpCode[0];
-            $statusClass = match ($firstChar) {
-                '2'      => 'success',
-                '3'      => 'warning',
-                '4', '5' => 'error',
-                default  => null
+            $statusCode  = $monitor['status'];
+            $statusLabel = match ($statusCode) {
+                0       => 'paused',
+                2       => 'online',
+                3       => 'redirected',
+                4       => 'user error',
+                5       => 'server error',
+                default => 'unknown'
             };
-            if ($monitor['status'] === 0) {
-                $statusClass = 'warning';
-                $httpCode    = 'paused';
-            }
+            $statusClass = match ($statusCode) {
+                2       => 'success',
+                0, 3    => 'warning',
+                4, 5    => 'error',
+                default => null
+            };
             ?>
             <div class="website-wrapper <?= $statusClass ?>" onclick="window.open('<?= $monitor['url'] ?>', '_blank')">
-                <p class="status"><?= $httpCode ?></p>
+                <p class="status"><?= $statusLabel ?></p>
                 <p class="name"><?= $monitor['friendly_name'] ?></p>
             </div>
         <?php endforeach; ?>

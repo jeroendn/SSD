@@ -25,7 +25,7 @@ final class Client
             'form_params' => [
                 'api_key' => $this->apiKey,
                 'format' => 'json',
-                'logs' => '1'
+                'logs' => '0'
             ]
         ];
 
