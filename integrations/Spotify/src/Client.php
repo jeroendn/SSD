@@ -4,7 +4,7 @@ namespace SSD\Integrations\Spotify;
 
 use SpotifyWebAPI\Session;
 use SpotifyWebAPI\SpotifyWebAPI;
-use SpotifyWebAPI\SpotifyWebAPIAuthException;
+use SpotifyWebAPI\SpotifyWebAPIException;
 
 final class Client
 {
@@ -118,13 +118,13 @@ final class Client
     try {
       $currentlyPlayingTrack = $this->api->getMyCurrentTrack();
     }
-    catch (SpotifyWebAPIAuthException $e) {
+    catch (SpotifyWebAPIException $e) {
       $this->login();
 
       try {
           $currentlyPlayingTrack = $this->api->getMyCurrentTrack();
       }
-      catch (SpotifyWebAPIAuthException $e) {
+      catch (SpotifyWebAPIException $e) {
         return null;
       }
     }
