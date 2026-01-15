@@ -21,6 +21,8 @@ elif [ "$1" == "update" ]; then
     npm update
 
     echo -e "${SUCCESS}Update finished${NC}"
+elif [ "$1" == "watch" ]; then
+    npx mix watch
 else
     echo -e "${WARNING}No option specified${NC}"
 fi

@@ -14,8 +14,15 @@
 }
 
 :root {
-  --grid-item-width: 137.1px;
+  --grid-item-width: 135px;
   --grid-item-height: 135px;
+}
+
+@media only screen and (min-width: 1980px) {
+  :root {
+    --grid-item-width: 137.1px;
+    --grid-item-height: 137.1px;
+  }
 }
 
 body {
