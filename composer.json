@@ -9,7 +9,7 @@
     "jeroendn/php-js-console-logger": "^1.0",
     "guzzlehttp/guzzle": "^7.4",
     "jwilsson/spotify-web-api-php": "^5.2",
-    "jeroendn/php-helpers": "0.7-beta"
+    "jeroendn/php-helpers": "0.8-beta"
   },
   "autoload": {
     "psr-4": {
