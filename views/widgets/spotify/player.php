@@ -8,7 +8,7 @@ try {
 
     $playbackState = $spotify->getCurrentlyPlayingTrack();
 
-    $isPodcast = $playbackState->currently_playing_type === 'episode';
+    $isPodcast = ($playbackState->currently_playing_type ?? null) === 'episode';
 }
 catch (Throwable $e) {
     ?>
