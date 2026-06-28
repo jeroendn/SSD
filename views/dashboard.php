@@ -56,6 +56,10 @@ require_once __DIR__ . '/../php/session.php';
             <?php getWidget('steam', 'top10PlayedGames'); ?>
         </div>
 
+        <div class="grid-item grid-item-2-3">
+            <?php getWidget('tweakers', 'newsfeed'); ?>
+        </div>
+
     </div>
 
     <div class="grid-group-vertical">

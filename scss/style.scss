@@ -266,6 +266,27 @@ p {
       }
     }
   }
+
+  &.tweakers-widget {
+    background-color: #333;
+
+    .widget-heading .widget-title {
+      background-color: #a11236;
+    }
+
+    .widget-body {
+      .link-wrapper {
+        display: flex;
+        justify-content: space-between;
+        padding: 2px 5px;
+        cursor: pointer;
+
+        .title {
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
 }
 
 nav#hidden-nav {

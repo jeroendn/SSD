@@ -87,6 +87,14 @@ require_once __DIR__ . '/../php/session.php';
         </div>
     </div>
 
+    <h1>Tweakers</h1>
+
+    <div class="grid-container">
+        <div class="grid-item grid-item-2-3">
+            <?php getWidget('tweakers', 'newsfeed'); ?>
+        </div>
+    </div>
+
 </main>
 
 <?php require_once __DIR__ . '/elements/js.php'; ?>

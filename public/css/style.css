@@ -217,6 +217,22 @@ p {
 .widget.uptimerobot-widget .widget-body .website-wrapper.error .status {
   background-color: red;
 }
+.widget.tweakers-widget {
+  background-color: #333;
+}
+.widget.tweakers-widget .widget-heading .widget-title {
+  background-color: #a11236;
+}
+.widget.tweakers-widget .widget-body .link-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 5px;
+  cursor: pointer;
+}
+.widget.tweakers-widget .widget-body .link-wrapper .title {
+  margin-bottom: 4px;
+}
+
 nav#hidden-nav {
   position: fixed;
   top: 0;
