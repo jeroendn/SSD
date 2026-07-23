@@ -59,7 +59,7 @@ Dev commands (executed inside the php_ssd container):
   install          composer install + npm install + asset build
   update           composer update + npm update
   watch            rebuild assets on change (mix watch)
-  code-quality-assurance, cqa  quality gate: currently just the PHPUnit test suite
+  code-quality-assurance, cqa  quality gate: composer normalize + PHPUnit test suite
   composer <args>  run any composer command in the container
 
 Anything else is passed straight through to `docker compose`, e.g.:
@@ -101,6 +101,8 @@ case "${1:-}" in
         # TODO: convert to `run vendor/bin/code-quality-assurance.sh` once
         # jeroendn/php-helpers can be bumped to >=1.0.0 — the first release
         # that ships the script. 1.0.0 requires PHP 8.5; this repo runs 8.3.
+        run composer normalize
+        run composer validate
         run composer phpunit
         ok "Code quality assurance completed"
         ;;
