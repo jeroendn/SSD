@@ -75,20 +75,32 @@ case "${1:-}" in
         usage
         ;;
     checkout|c)
-        run ./develop install
-        ok "Checkout finished"
+        if run ./develop install; then
+            ok "Checkout finished"
+        else
+            err "Checkout failed"
+            exit 1
+        fi
         ;;
     install)
-        run composer install
-        run npm install
-        run npx modclean -r -n default:safe,default:caution
-        run npx mix
-        ok "Installation finished"
+        if run composer install \
+            && run npm install \
+            && run npx modclean -r -n default:safe,default:caution \
+            && run npx mix; then
+            ok "Installation finished"
+        else
+            err "Installation failed"
+            exit 1
+        fi
         ;;
     update)
-        run composer update
-        run npm update
-        ok "Update finished"
+        if run composer update \
+            && run npm update; then
+            ok "Update finished"
+        else
+            err "Update failed"
+            exit 1
+        fi
         ;;
     watch)
         run npx mix watch
@@ -101,10 +113,14 @@ case "${1:-}" in
         # TODO: convert to `run vendor/bin/code-quality-assurance.sh` once
         # jeroendn/php-helpers can be bumped to >=1.0.0 — the first release
         # that ships the script. 1.0.0 requires PHP 8.5; this repo runs 8.3.
-        run composer normalize
-        run composer validate
-        run composer phpunit
-        ok "Code quality assurance completed"
+        if run composer normalize \
+            && run composer validate \
+            && run composer phpunit; then
+            ok "Code quality assurance completed"
+        else
+            err "Code quality assurance failed"
+            exit 1
+        fi
         ;;
     *)
         # Default: proxy to docker compose (host only).
