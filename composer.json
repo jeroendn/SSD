@@ -1,8 +1,8 @@
 {
   "name": "jeroendn/ssd",
   "description": "Jeroen's Statistics/Status Dashboard",
-  "type": "project",
   "license": "MIT",
+  "type": "project",
   "require": {
     "php": "^8.3",
     "ext-curl": "^8.0",
@@ -12,17 +12,40 @@
     "jeroendn/php-js-console-logger": "^1.0",
     "jwilsson/spotify-web-api-php": "^5.2"
   },
+  "require-dev": {
+    "ergebnis/composer-normalize": "^2.52",
+    "friendsofphp/php-cs-fixer": "^3.95",
+    "phpstan/phpstan": "^2.2",
+    "phpunit/phpunit": "^12.5",
+    "rector/rector": "^2.5"
+  },
+  "prefer-stable": true,
   "autoload": {
     "psr-4": {
       "SSD\\Integrations\\Spotify\\": "integrations/Spotify/src",
       "SSD\\Integrations\\Steam\\": "integrations/Steam/src",
-      "SSD\\Integrations\\UptimeRobot\\": "integrations/UptimeRobot/src",
-      "SSD\\Integrations\\Tweakers\\": "integrations/Tweakers/src"
+      "SSD\\Integrations\\Tweakers\\": "integrations/Tweakers/src",
+      "SSD\\Integrations\\UptimeRobot\\": "integrations/UptimeRobot/src"
     }
   },
-  "prefer-stable": true,
-  "scripts": {},
+  "autoload-dev": {
+    "psr-4": {
+      "SSD\\Test\\": "tests/"
+    }
+  },
   "config": {
+    "allow-plugins": {
+      "ergebnis/composer-normalize": true
+    },
     "sort-packages": true
+  },
+  "scripts": {
+    "cs-check": "php-cs-fixer check",
+    "cs-fix": "php-cs-fixer fix",
+    "phpstan": "phpstan analyse",
+    "phpstan-baseline": "phpstan analyse --generate-baseline",
+    "phpunit": "phpunit",
+    "rector-check": "rector --dry-run",
+    "rector-fix": "rector"
   }
 }

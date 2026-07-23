@@ -1,28 +1,136 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-NC="\e[0m"
-SUCCESS="\e[42m"
-WARNING="\e[43m"
-ERROR="\e[41m"
+set -uo pipefail
 
-if [ "$1" == "checkout" ] || [ "$1" == "c" ]; then
-    ./develop install
+CONTAINER="${SSD_CONTAINER:-php_ssd}"
 
-    echo -e "${SUCCESS}Checkout finished${NC}"
-elif [ "$1" == "install" ]; then
-    composer install
-    npm install
-    npx modclean -r -n default:safe,default:caution
-    npx mix
+# Detect Git Bash on Windows: there `uname -s` prints "MINGW64_NT-..." or
+# "MSYS_NT-...". Git Bash needs two workarounds that must NOT apply on
+# macOS/Linux/WSL:
+#
+#   1. Git Bash rewrites arguments that look like Unix paths into Windows paths
+#      before the command ever sees them (e.g. `/var/www` becomes
+#      `C:/Program Files/Git/var/www`), which mangles paths meant for inside
+#      the container. MSYS_NO_PATHCONV=1 disables that rewriting.
+#
+#   2. Git Bash's terminal is not a real Windows console, so allocating a TTY
+#      with `docker exec -t` fails there ("the input device is not a TTY").
+#      run() checks IS_MSYS and leaves out the -t flag in that case.
+IS_MSYS=false
+case "$(uname -s 2>/dev/null)" in
+    MINGW* | MSYS*)
+        IS_MSYS=true
+        export MSYS_NO_PATHCONV=1
+        ;;
+esac
 
-    echo -e "${SUCCESS}Installation finished${NC}"
-elif [ "$1" == "update" ]; then
-    composer update
-    npm update
+ok()  { printf '\033[30;42m %s \033[0m\n' "$1"; }
+err() { printf '\033[97;41m %s \033[0m\n' "$1" >&2; }
 
-    echo -e "${SUCCESS}Update finished${NC}"
-elif [ "$1" == "watch" ]; then
-    npx mix watch
-else
-    echo -e "${WARNING}No option specified${NC}"
-fi
+# Are we running inside the Docker container?
+in_container() { [ -f /.dockerenv ]; }
+
+ensure_container_running() {
+    if ! docker ps --format '{{.Names}}' | grep -qx "$CONTAINER"; then
+        err "Container '$CONTAINER' is not running. Start it with: ./develop up -d --build"
+        exit 1
+    fi
+}
+
+run() {
+    if in_container; then
+        "$@"
+    else
+        ensure_container_running
+        if [ -t 1 ] && [ "$IS_MSYS" = false ]; then
+            docker exec -it "$CONTAINER" "$@"
+        else
+            docker exec "$CONTAINER" "$@"
+        fi
+    fi
+}
+
+usage() {
+    cat <<'EOF'
+Usage: ./develop <command>
+
+Dev commands (executed inside the php_ssd container):
+  checkout, c      composer + npm install and asset build
+  install          composer install + npm install + asset build
+  update           composer update + npm update
+  watch            rebuild assets on change (mix watch)
+  code-quality-assurance, cqa  quality gate: normalize + validate + rector + cs-fix + phpstan + phpunit
+  composer <args>  run any composer command in the container
+
+Anything else is passed straight through to `docker compose`, e.g.:
+  ./develop up -d --build
+  ./develop down
+  ./develop logs -f
+  ./develop ps
+EOF
+}
+
+case "${1:-}" in
+    ""|help|-h|--help)
+        usage
+        ;;
+    checkout|c)
+        if run ./develop install; then
+            ok "Checkout finished"
+        else
+            err "Checkout failed"
+            exit 1
+        fi
+        ;;
+    install)
+        if run composer install \
+            && run npm install \
+            && run npx modclean -r -n default:safe,default:caution \
+            && run npx mix; then
+            ok "Installation finished"
+        else
+            err "Installation failed"
+            exit 1
+        fi
+        ;;
+    update)
+        if run composer update \
+            && run npm update; then
+            ok "Update finished"
+        else
+            err "Update failed"
+            exit 1
+        fi
+        ;;
+    watch)
+        run npx mix watch
+        ;;
+    composer)
+        shift
+        run composer "$@"
+        ;;
+    code-quality-assurance|cqa)
+        # TODO: convert to `run vendor/bin/code-quality-assurance.sh` once
+        # jeroendn/php-helpers can be bumped to >=1.0.0 — the first release
+        # that ships the script. 1.0.0 requires PHP 8.5; this repo runs 8.3.
+        if run composer normalize \
+            && run composer validate \
+            && run composer rector-fix \
+            && run composer cs-fix \
+            && run composer phpstan \
+            && run composer phpunit; then
+            ok "Code quality assurance completed"
+        else
+            err "Code quality assurance failed"
+            exit 1
+        fi
+        ;;
+    *)
+        # Default: proxy to docker compose (host only).
+        if in_container; then
+            err "'docker compose' is not available inside the container."
+            exit 1
+        fi
+        exec docker compose "$@"
+        ;;
+esac

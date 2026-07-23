@@ -1,0 +1,12 @@
+includes:
+    - phpstan-baseline.neon
+
+parameters:
+    level: 10
+    tmpDir: tmp/phpstan
+    paths:
+        - integrations
+        - php
+        - tests
+        - rector.php
+        - .php-cs-fixer.dist.php

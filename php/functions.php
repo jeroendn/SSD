@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Authenticate if the user is allowed to view the content.
  * @return bool

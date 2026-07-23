@@ -4,9 +4,9 @@ namespace SSD\Integrations\Tweakers;
 
 class Post
 {
-    public string|null $date        = null;
+    public ?string $date        = null;
     public int         $timestamp   = 0;
-    public string|null $url         = null;
-    public string|null $title       = null;
-    public string|null $description = null;
+    public ?string $url         = null;
+    public ?string $title       = null;
+    public ?string $description = null;
 }

@@ -1,0 +1,331 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Constant API_SPOTIFY_CLIENT_ID not found\.$#'
+			identifier: constant.notFound
+			count: 1
+			path: integrations/Spotify/src/Client.php
+
+		-
+			message: '#^Constant API_SPOTIFY_CLIENT_SECRET not found\.$#'
+			identifier: constant.notFound
+			count: 1
+			path: integrations/Spotify/src/Client.php
+
+		-
+			message: '#^Method SSD\\Integrations\\Spotify\\Client\:\:getCurrentlyPlayingTrack\(\) should return object\|null but returns array\|object\.$#'
+			identifier: return.type
+			count: 1
+			path: integrations/Spotify/src/Client.php
+
+		-
+			message: '#^Method SSD\\Integrations\\Spotify\\Client\:\:initNewTokens\(\) is unused\.$#'
+			identifier: method.unused
+			count: 1
+			path: integrations/Spotify/src/Client.php
+
+		-
+			message: '#^Method SSD\\Integrations\\Spotify\\Client\:\:printAuthUrl\(\) is unused\.$#'
+			identifier: method.unused
+			count: 1
+			path: integrations/Spotify/src/Client.php
+
+		-
+			message: '#^Method SSD\\Integrations\\Spotify\\Client\:\:setTokens\(\) invoked with 2 parameters, 3 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: integrations/Spotify/src/Client.php
+
+		-
+			message: '#^Parameter \#1 \$accessToken of method SpotifyWebAPI\\Session\:\:setAccessToken\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: integrations/Spotify/src/Client.php
+
+		-
+			message: '#^Parameter \#1 \$clientId of class SpotifyWebAPI\\Session constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: integrations/Spotify/src/Client.php
+
+		-
+			message: '#^Parameter \#1 \$refreshToken of method SpotifyWebAPI\\Session\:\:refreshAccessToken\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: integrations/Spotify/src/Client.php
+
+		-
+			message: '#^Parameter \#1 \$refreshToken of method SpotifyWebAPI\\Session\:\:setRefreshToken\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: integrations/Spotify/src/Client.php
+
+		-
+			message: '#^Parameter \#2 \$clientSecret of class SpotifyWebAPI\\Session constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: integrations/Spotify/src/Client.php
+
+		-
+			message: '#^Property SSD\\Integrations\\Spotify\\Client\:\:\$tokens \(array\) does not accept mixed\.$#'
+			identifier: assign.propertyType
+			count: 2
+			path: integrations/Spotify/src/Client.php
+
+		-
+			message: '#^Property SSD\\Integrations\\Spotify\\Client\:\:\$tokens type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: integrations/Spotify/src/Client.php
+
+		-
+			message: '#^Variable \$tokens in empty\(\) is never defined\.$#'
+			identifier: empty.variable
+			count: 1
+			path: integrations/Spotify/src/Client.php
+
+		-
+			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 1
+			path: integrations/Steam/src/Client.php
+
+		-
+			message: '#^Cannot access offset ''0'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: integrations/Steam/src/Client.php
+
+		-
+			message: '#^Cannot access offset ''games'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: integrations/Steam/src/Client.php
+
+		-
+			message: '#^Cannot access offset ''players'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: integrations/Steam/src/Client.php
+
+		-
+			message: '#^Cannot access offset ''response'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: integrations/Steam/src/Client.php
+
+		-
+			message: '#^Cannot access property \$data on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: integrations/Steam/src/Client.php
+
+		-
+			message: '#^Constant API_KEY_STEAM not found\.$#'
+			identifier: constant.notFound
+			count: 1
+			path: integrations/Steam/src/Client.php
+
+		-
+			message: '#^Constant API_STEAM_ID not found\.$#'
+			identifier: constant.notFound
+			count: 1
+			path: integrations/Steam/src/Client.php
+
+		-
+			message: '#^Method SSD\\Integrations\\Steam\\Client\:\:getAppDetails\(\) should return object\|null but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: integrations/Steam/src/Client.php
+
+		-
+			message: '#^Parameter \#1 \$data of class SSD\\Integrations\\Steam\\Entity\\OwnedGame constructor expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: integrations/Steam/src/Client.php
+
+		-
+			message: '#^Parameter \#1 \$data of class SSD\\Integrations\\Steam\\Entity\\PlayerSummary constructor expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: integrations/Steam/src/Client.php
+
+		-
+			message: '#^Property SSD\\Integrations\\Steam\\Client\:\:\$apiKey \(string\) does not accept mixed\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: integrations/Steam/src/Client.php
+
+		-
+			message: '#^Property SSD\\Integrations\\Steam\\Client\:\:\$steamId \(string\) does not accept mixed\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: integrations/Steam/src/Client.php
+
+		-
+			message: '#^Cannot cast mixed to int\.$#'
+			identifier: cast.int
+			count: 6
+			path: integrations/Steam/src/Entity/OwnedGame.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 2
+			path: integrations/Steam/src/Entity/OwnedGame.php
+
+		-
+			message: '#^Method SSD\\Integrations\\Steam\\Entity\\OwnedGame\:\:__construct\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: integrations/Steam/src/Entity/OwnedGame.php
+
+		-
+			message: '#^Method SSD\\Integrations\\Steam\\Entity\\OwnedGame\:\:getPlaytime2Weeks\(\) should return float\|int but returns int\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: integrations/Steam/src/Entity/OwnedGame.php
+
+		-
+			message: '#^Method SSD\\Integrations\\Steam\\Entity\\OwnedGame\:\:getPlaytime2Weeks\(\) should return float\|int but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: integrations/Steam/src/Entity/OwnedGame.php
+
+		-
+			message: '#^Method SSD\\Integrations\\Steam\\Entity\\OwnedGame\:\:getPlaytimeForever\(\) should return int but returns float\.$#'
+			identifier: return.type
+			count: 1
+			path: integrations/Steam/src/Entity/OwnedGame.php
+
+		-
+			message: '#^Cannot cast mixed to int\.$#'
+			identifier: cast.int
+			count: 3
+			path: integrations/Steam/src/Entity/PlayerSummary.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 13
+			path: integrations/Steam/src/Entity/PlayerSummary.php
+
+		-
+			message: '#^Method SSD\\Integrations\\Steam\\Entity\\PlayerSummary\:\:__construct\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: integrations/Steam/src/Entity/PlayerSummary.php
+
+		-
+			message: '#^Parameter \#1 \$timestamp of method DateTimeImmutable\:\:setTimestamp\(\) expects int, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: integrations/Steam/src/Entity/PlayerSummary.php
+
+		-
+			message: '#^Cannot access property \$playtime2Weeks on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: integrations/Steam/src/Steam.php
+
+		-
+			message: '#^Method SSD\\Integrations\\Steam\\Steam\:\:getTop10PlayedGames\(\) should return array\<SSD\\Integrations\\Steam\\Entity\\OwnedGame\> but returns list\.$#'
+			identifier: return.type
+			count: 1
+			path: integrations/Steam/src/Steam.php
+
+		-
+			message: '#^Method SSD\\Integrations\\Steam\\Steam\:\:getTop10PlayedGamesLast2Weeks\(\) should return array\<SSD\\Integrations\\Steam\\Entity\\OwnedGame\> but returns list\.$#'
+			identifier: return.type
+			count: 1
+			path: integrations/Steam/src/Steam.php
+
+		-
+			message: '#^Method SSD\\Integrations\\Tweakers\\Tweakers\:\:__construct\(\) with return type void returns array but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: integrations/Tweakers/src/Tweakers.php
+
+		-
+			message: '#^Method SSD\\Integrations\\Tweakers\\Tweakers\:\:__construct\(\) with return type void returns list\<SSD\\Integrations\\Tweakers\\Post\> but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: integrations/Tweakers/src/Tweakers.php
+
+		-
+			message: '#^Property SSD\\Integrations\\Tweakers\\Post\:\:\$timestamp \(int\) does not accept int\|false\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: integrations/Tweakers/src/Tweakers.php
+
+		-
+			message: '#^Constant API_KEY_UPTIME_ROBOT_READ_ONLY not found\.$#'
+			identifier: constant.notFound
+			count: 1
+			path: integrations/UptimeRobot/src/Client.php
+
+		-
+			message: '#^Method SSD\\Integrations\\UptimeRobot\\Client\:\:getMonitors\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: integrations/UptimeRobot/src/Client.php
+
+		-
+			message: '#^Method SSD\\Integrations\\UptimeRobot\\Client\:\:getMonitors\(\) should return array\|null but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: integrations/UptimeRobot/src/Client.php
+
+		-
+			message: '#^Property SSD\\Integrations\\UptimeRobot\\Client\:\:\$apiKey \(string\) does not accept mixed\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: integrations/UptimeRobot/src/Client.php
+
+		-
+			message: '#^Cannot access offset ''status'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: integrations/UptimeRobot/src/UptimeRobot.php
+
+		-
+			message: '#^Method SSD\\Integrations\\UptimeRobot\\UptimeRobot\:\:getMonitors\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: integrations/UptimeRobot/src/UptimeRobot.php
+
+		-
+			message: '#^Parameter \#1 \$array of function usort expects TArray of array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: integrations/UptimeRobot/src/UptimeRobot.php
+
+		-
+			message: '#^Binary operation "\." between ''\?'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: php/functions.php
+
+		-
+			message: '#^Binary operation "\." between non\-falsy\-string and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: php/functions.php
+
+		-
+			message: '#^Constant URL_SECRET_KEY not found\.$#'
+			identifier: constant.notFound
+			count: 3
+			path: php/functions.php
+
+		-
+			message: '#^Constant URL_SECRET_VALUE not found\.$#'
+			identifier: constant.notFound
+			count: 1
+			path: php/functions.php
+
+		-
+			message: '#^Possibly invalid array key type mixed\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 3
+			path: php/functions.php

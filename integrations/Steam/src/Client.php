@@ -7,7 +7,7 @@ use SSD\Integrations\Steam\Entity\OwnedGame;
 use SSD\Integrations\Steam\Entity\PlayerSummary;
 use Throwable;
 
-final class Client
+final readonly class Client
 {
     private string $apiKey;
     private string $steamId;
@@ -33,8 +33,7 @@ final class Client
 
         try {
             $response = (new GuzzleClient())->request('GET', $url);
-        }
-        catch (Throwable $e) {
+        } catch (Throwable) {
             return null; // Silent fail
         }
 
@@ -52,8 +51,7 @@ final class Client
 
         try {
             $response = (new GuzzleClient())->request('GET', $url);
-        }
-        catch (Throwable $e) {
+        } catch (Throwable) {
             return []; // Silent fail
         }
 
@@ -71,14 +69,13 @@ final class Client
     /**
      * TODO Should be accepting multiple appIds and converting to custom class like OwnedGame.
      */
-    public function getAppDetails(int $appId): object|null
+    public function getAppDetails(int $appId): ?object
     {
         $url = sprintf('%s%s?appids=%s', self::BASE_URL_PUBLIC_API, self::URL_GET_APP_DETAILS, $appId);
 
         try {
             $response = (new GuzzleClient())->request('GET', $url);
-        }
-        catch (Throwable $e) {
+        } catch (Throwable) {
             return null; // Silent fail
         }
 

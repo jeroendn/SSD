@@ -4,20 +4,20 @@ namespace SSD\Integrations\Spotify;
 
 use SSD\Integrations\Spotify\Client as SpotifyClient;
 
-final class Spotify
+final readonly class Spotify
 {
-  private SpotifyClient $client;
+    private SpotifyClient $client;
 
-  public function __construct()
-  {
-      $this->client = new SpotifyClient;
-  }
+    public function __construct()
+    {
+        $this->client = new SpotifyClient();
+    }
 
-  /**
-   * @return object|null
-   */
-  public function getCurrentlyPlayingTrack(): ?object
-  {
-    return $this->client->getCurrentlyPlayingTrack();
-  }
+    /**
+     * @return object|null
+     */
+    public function getCurrentlyPlayingTrack(): ?object
+    {
+        return $this->client->getCurrentlyPlayingTrack();
+    }
 }
