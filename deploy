@@ -1,9 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -e
 
 NC="\e[0m"
 SUCCESS="\e[42m"
 WARNING="\e[43m"
 ERROR="\e[41m"
+
+trap 'echo -e "${ERROR}Deployment failed${NC}"' ERR
 
 CONTAINER_NAME="php_ssd"
 GIT_BRANCH="master"
@@ -11,7 +15,7 @@ GIT_REMOTE="origin"
 
 if [ "$EUID" -eq 0 ]; then
   echo -e "${ERROR}Do not run as sudo!${NC}"
-  exit
+  exit 1
 fi
 
 echo -e "${SUCCESS}Please enter your sudo password:${NC}"
@@ -21,19 +25,24 @@ echo -e "${SUCCESS}Pulling latest changes${NC}"
 git reset --hard
 git checkout $GIT_BRANCH
 git fetch $GIT_REMOTE
-git pull $GIT_REMOTE $GIT_BRANCH
+git reset --hard $GIT_REMOTE/$GIT_BRANCH
 
-echo -e "${SUCCESS}Setting executable permissions for scripts${NC}"
-chmod +x ./develop ./deploy
+echo -e "${SUCCESS}Setting executable permissions${NC}"
+chmod +x ./deploy
 
 echo -e "${SUCCESS}Rebuilding Docker image${NC}"
-sudo docker compose build
+sudo docker compose build --no-cache --pull
 
 echo -e "${SUCCESS}Restarting Docker containers${NC}"
 sudo docker compose down
 sudo docker compose up -d
 
 echo -e "${SUCCESS}Installing libraries${NC}"
-sudo docker exec -it $CONTAINER_NAME ./develop install
+sudo docker exec -it $CONTAINER_NAME composer install --no-dev --optimize-autoloader --no-interaction
+sudo docker exec -it $CONTAINER_NAME npm install
+sudo docker exec -it $CONTAINER_NAME npx modclean -r -n default:safe,default:caution
+
+echo -e "${SUCCESS}Building assets${NC}"
+sudo docker exec -it $CONTAINER_NAME npx mix --production
 
 echo -e "${SUCCESS}Deployment finished${NC}"
