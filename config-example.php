@@ -1,5 +1,6 @@
 <?php
 // Configuration
+const BASE_URL = ''; // Base URL of this dashboard on this machine, no trailing slash
 const URL_SECRET_KEY = '';
 const URL_SECRET_VALUE = '';
 

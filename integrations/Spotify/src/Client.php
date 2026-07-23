@@ -2,120 +2,142 @@
 
 namespace SSD\Integrations\Spotify;
 
+use JsonException;
 use SpotifyWebAPI\Session;
 use SpotifyWebAPI\SpotifyWebAPI;
 use SpotifyWebAPI\SpotifyWebAPIException;
 
 final class Client
 {
+    private const array SCOPES = ['user-read-playback-state', 'user-read-currently-playing'];
+    private const string TOKENS_FILE = __DIR__ . '/../../../config/spotify-tokens.json';
+
     private readonly Session $session;
     private readonly SpotifyWebAPI $api;
-    private array $tokens;
+    private readonly string $tokensFile;
+    private bool $loggedIn = false;
 
-    public function __construct()
+    /**
+     * All parameters default to the production dependencies and only exist for injection in unit tests.
+     * @param Session|null $session
+     * @param SpotifyWebAPI|null $api
+     * @param string|null $tokensFile
+     */
+    public function __construct(?Session $session = null, ?SpotifyWebAPI $api = null, ?string $tokensFile = null)
     {
-        $this->session = new Session(
+        $this->session = $session ?? new Session(
             API_SPOTIFY_CLIENT_ID,
             API_SPOTIFY_CLIENT_SECRET,
-            'https://zeta.jeroendn.nl' // Must match redirectUri in Spotify application dashboard
+            BASE_URL . '/spotify-auth' // Must be registered as redirect URI in the Spotify application dashboard
         );
-        $this->api = new SpotifyWebAPI();
+        $this->api = $api ?? new SpotifyWebAPI();
+        $this->tokensFile = $tokensFile ?? self::TOKENS_FILE;
+    }
 
-        $this->login();
+    /**
+     * The URL to visit to authorize the application. Spotify redirects back to the redirect URI with a "code" query
+     * parameter, which can then be passed to requestTokens(). Used by views/spotify-auth.php.
+     * @param string|null $state Echoed back by Spotify in the redirect, used to protect the callback endpoint
+     * @return string
+     */
+    public function getAuthorizeUrl(?string $state = null): string
+    {
+        $options = ['scope' => self::SCOPES];
+
+        if ($state !== null) {
+            $options['state'] = $state;
+        }
+
+        return $this->session->getAuthorizeUrl($options);
+    }
+
+    /**
+     * Exchange an authorization code for access and refresh tokens and store them. Used by views/spotify-auth.php.
+     * @param string $authorizationCode
+     * @return bool Success status
+     * @throws JsonException
+     */
+    public function requestTokens(string $authorizationCode): bool
+    {
+        return $this->session->requestAccessToken($authorizationCode) && $this->storeSessionTokens();
     }
 
     /**
      * @return void
+     * @throws JsonException
      */
     private function login(): void
     {
-        //    $this->printAuthUrl();
+        $tokens = $this->getTokens();
 
-        //    $this->initNewTokens();
+        $accessToken = $tokens['accessToken'] ?? null;
+        $refreshToken = $tokens['refreshToken'] ?? null;
+        $tokenExpiration = $tokens['tokenExpiration'] ?? 0;
 
-        if (empty($tokens)) {
-            $this->tokens = $this->getTokens(); // TODO Find a way were we don't request the tokens at every ajax request
+        if (!is_string($refreshToken) || $refreshToken === '') {
+            throw new NotAuthenticatedException('Spotify is not authenticated. Visit /spotify-auth to authorize.');
         }
 
-        $accessToken = $this->tokens['accessToken'] ?? null;
-        $refreshToken = $this->tokens['refreshToken'] ?? null;
-        $tokenExpiration = $this->tokens['tokenExpiration'] ?? null;
-
-        if ($accessToken && $tokenExpiration > time()) { // If we have a token, and it's not expired, use it
+        if (is_string($accessToken) && is_int($tokenExpiration) && $tokenExpiration > time()) { // If we have a token, and it's not expired, use it
             $this->session->setAccessToken($accessToken);
             $this->session->setRefreshToken($refreshToken);
         } else {
             $this->session->refreshAccessToken($refreshToken);
-            if (!$this->setTokens($this->session->getAccessToken(), $this->session->getRefreshToken(), $this->session->getTokenExpiration())) { // Try one more time on failure
+            if (!$this->storeSessionTokens()) { // Try one more time on failure
                 sleep(1); // Wait a second, before try again
-                $this->setTokens($this->session->getAccessToken(), $this->session->getRefreshToken(), $this->session->getTokenExpiration());
+                $this->storeSessionTokens();
             }
-
-            $this->tokens = $this->getTokens(); // Update tokens
         }
 
         $this->api->setAccessToken($this->session->getAccessToken());
-    }
-
-    /**
-     * FOR DEVELOPMENT ONLY
-     */
-    private function printAuthUrl(): never
-    {
-        print_r($this->session->getAuthorizeUrl(['scope' => ['user-read-playback-state', 'user-read-currently-playing']]));
-        die;
-    }
-
-    /**
-     * FOR DEVELOPMENT ONLY
-     */
-    private function initNewTokens(): never
-    {
-        $this->session->requestAccessToken('AQAYSq5qI8_KqSCJ_yNi8zpoD0xY-lN3hxvpR19hyDdl3Dn4R6sGc6KWC1hgOHZLB44H3ldJDTAk4NQ0yCreYdUvvC-6rwmfRL6EihO3baV43OXN-9DCTT8xMfW7JISqmTc_9u9fm1m4wvhx9iT7hbIf7sEC9HTkRgHH93vXHk03b2L7EH3IWHv7Sx-GqBoaIAZ2sTWxsHsmC4DlxGzyqBC-mbwYbAjl6vmt3qiR4z2HPchfi3s'); // Code returned from Spotify in the redirected url parameters
-        echo $this->session->getAccessToken() . '&nbsp;<br>&nbsp;';
-        echo $this->session->getRefreshToken();
-        $this->setTokens($this->session->getAccessToken(), $this->session->getRefreshToken());
-        die;
+        $this->loggedIn = true;
     }
 
     /**
      * Get the current access and refresh tokens from a json file.
-     * @return mixed
+     * @return array<mixed> Not shaped, the file contents may be anything
      */
-    private function getTokens(): mixed
+    private function getTokens(): array
     {
-        $fileContents = @file_get_contents(__DIR__ . '/../../../config/spotify-tokens.json');
+        $fileContents = @file_get_contents($this->tokensFile);
 
         if (!$fileContents) {
             return [];
         }
 
-        return json_decode($fileContents, true);
+        return (array) json_decode($fileContents, true);
     }
 
     /**
-     * Set the current access and refresh tokens to a json file.
-     * @param string $accessToken
-     * @param string $refreshToken
-     * @param int $tokenExpiration
+     * Store the session's current access and refresh tokens to a json file.
      * @return bool Success status
+     * @throws JsonException
      */
-    private function setTokens(string $accessToken, string $refreshToken, int $tokenExpiration): bool
+    private function storeSessionTokens(): bool
     {
-        $json = ['accessToken' => $accessToken, 'refreshToken' => $refreshToken, 'tokenExpiration' => $tokenExpiration];
+        $json = [
+            'accessToken' => $this->session->getAccessToken(),
+            'refreshToken' => $this->session->getRefreshToken(),
+            'tokenExpiration' => $this->session->getTokenExpiration(),
+        ];
 
-        return (bool) file_put_contents(__DIR__ . '/../../../config/spotify-tokens.json', json_encode($json));
+        return (bool) file_put_contents($this->tokensFile, json_encode($json, JSON_THROW_ON_ERROR), LOCK_EX); // Lock to prevent torn writes by concurrent widget refreshes
     }
 
     /**
      * @return object|null
+     * @throws JsonException
      */
     public function getCurrentlyPlayingTrack(): ?object
     {
+        if (!$this->loggedIn) {
+            $this->login();
+        }
+
         try {
             $currentlyPlayingTrack = $this->api->getMyCurrentTrack();
         } catch (SpotifyWebAPIException) {
-            $this->login();
+            $this->login(); // The access token may just have expired, retry once with a fresh login
 
             try {
                 $currentlyPlayingTrack = $this->api->getMyCurrentTrack();
@@ -124,6 +146,6 @@ final class Client
             }
         }
 
-        return $currentlyPlayingTrack;
+        return is_object($currentlyPlayingTrack) ? $currentlyPlayingTrack : null;
     }
 }
