@@ -6,6 +6,7 @@ use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use SpotifyWebAPI\Session;
 use SpotifyWebAPI\SpotifyWebAPI;
+use SpotifyWebAPI\SpotifyWebAPIAuthException;
 use SpotifyWebAPI\SpotifyWebAPIException;
 use SSD\Integrations\Spotify\Client;
 use SSD\Integrations\Spotify\NotAuthenticatedException;
@@ -143,6 +144,19 @@ final class ClientTest extends TestCase
             ['accessToken' => 'refreshed-access-token', 'refreshToken' => 'stored-refresh-token', 'tokenExpiration' => 1_900_000_000],
             $this->readTokensFile()
         );
+    }
+
+    public function testThrowsNotAuthenticatedWhenRefreshTokenIsRevoked(): void
+    {
+        $this->writeTokensFile(['accessToken' => 'expired-access-token', 'refreshToken' => 'revoked-refresh-token', 'tokenExpiration' => time() - 60]);
+
+        $session = $this->createStub(Session::class);
+        $session->method('refreshAccessToken')->willThrowException(new SpotifyWebAPIAuthException('Refresh token revoked'));
+
+        $client = new Client($session, $this->createStub(SpotifyWebAPI::class), $this->tokensFile);
+
+        $this->expectException(NotAuthenticatedException::class);
+        $client->getCurrentlyPlayingTrack();
     }
 
     public function testRetriesOnceWhenTheApiThrows(): void

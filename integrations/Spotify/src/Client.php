@@ -5,6 +5,7 @@ namespace SSD\Integrations\Spotify;
 use JsonException;
 use SpotifyWebAPI\Session;
 use SpotifyWebAPI\SpotifyWebAPI;
+use SpotifyWebAPI\SpotifyWebAPIAuthException;
 use SpotifyWebAPI\SpotifyWebAPIException;
 
 final class Client
@@ -82,7 +83,11 @@ final class Client
             $this->session->setAccessToken($accessToken);
             $this->session->setRefreshToken($refreshToken);
         } else {
-            $this->session->refreshAccessToken($refreshToken);
+            try {
+                $this->session->refreshAccessToken($refreshToken);
+            } catch (SpotifyWebAPIAuthException $e) { // The refresh token was revoked or is otherwise no longer accepted
+                throw new NotAuthenticatedException('Spotify authorization was revoked. Visit /spotify-auth to re-authorize.', previous: $e);
+            }
             if (!$this->storeSessionTokens()) { // Try one more time on failure
                 sleep(1); // Wait a second, before try again
                 $this->storeSessionTokens();
