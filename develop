@@ -59,7 +59,7 @@ Dev commands (executed inside the php_ssd container):
   install          composer install + npm install + asset build
   update           composer update + npm update
   watch            rebuild assets on change (mix watch)
-  code-quality-assurance, cqa  quality gate: normalize + validate + rector + phpstan + phpunit
+  code-quality-assurance, cqa  quality gate: normalize + validate + rector + cs-fix + phpstan + phpunit
   composer <args>  run any composer command in the container
 
 Anything else is passed straight through to `docker compose`, e.g.:
@@ -116,6 +116,7 @@ case "${1:-}" in
         if run composer normalize \
             && run composer validate \
             && run composer rector-fix \
+            && run composer cs-fix \
             && run composer phpstan \
             && run composer phpunit; then
             ok "Code quality assurance completed"

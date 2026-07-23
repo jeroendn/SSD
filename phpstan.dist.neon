@@ -8,3 +8,5 @@ parameters:
         - integrations
         - php
         - tests
+        - rector.php
+        - .php-cs-fixer.dist.php
