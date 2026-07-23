@@ -15,9 +15,9 @@ function authorized(): bool
  */
 function getSecretQuery(): string
 {
-    $value = $_GET[URL_SECRET_KEY];
+    $value = $_GET[URL_SECRET_KEY] ?? '';
 
-    return '?' . URL_SECRET_KEY . '=' . $value;
+    return '?' . URL_SECRET_KEY . '=' . (is_string($value) ? $value : '');
 }
 
 /**

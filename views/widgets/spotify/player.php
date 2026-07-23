@@ -1,6 +1,7 @@
 <?php
 
 use SSD\Integrations\Spotify\Helper as SpotifyHelper;
+use SSD\Integrations\Spotify\NotAuthenticatedException;
 use SSD\Integrations\Spotify\Spotify;
 
 try {
@@ -9,6 +10,19 @@ try {
     $playbackState = $spotify->getCurrentlyPlayingTrack();
 
     $isPodcast = ($playbackState->currently_playing_type ?? null) === 'episode';
+}
+catch (NotAuthenticatedException) {
+    ?>
+    <div id="widget-spotify-player" class="widget spotify-widget auto-refresh" refresh-rate="20000">
+        <div class="widget-heading">
+            <p class="widget-title">Spotify</p>
+        </div>
+        <div class="widget-body">
+            <p>Spotify is not authenticated. <a href="/spotify-auth<?= getSecretQuery() ?>">Authorize</a></p>
+        </div>
+    </div>
+    <?php
+    die;
 }
 catch (Throwable $e) {
     ?>

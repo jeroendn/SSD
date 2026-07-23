@@ -4,6 +4,8 @@ includes:
 parameters:
     level: 10
     tmpDir: tmp/phpstan
+    scanFiles:
+        - config-example.php # Symbol discovery for the constants defined in the gitignored config.php
     paths:
         - integrations
         - php
