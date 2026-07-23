@@ -7,7 +7,7 @@ use Throwable;
 
 final class Client
 {
-    private string $apiKey;
+    private readonly string $apiKey;
     private string $baseUrl = 'https://api.uptimerobot.com';
 
     private string $urlGetMonitors = '/v2/getMonitors';
@@ -32,7 +32,7 @@ final class Client
         try {
             $response = (new GuzzleClient())->request('POST', $url, $options);
         }
-        catch (Throwable $e) {
+        catch (Throwable) {
             return null; // Silent fail
         }
 

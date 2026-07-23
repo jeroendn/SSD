@@ -4,7 +4,7 @@ namespace SSD\Integrations\Spotify;
 
 use SSD\Integrations\Spotify\Client as SpotifyClient;
 
-final class Spotify
+final readonly class Spotify
 {
   private SpotifyClient $client;
 

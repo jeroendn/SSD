@@ -2,7 +2,7 @@
 
 namespace SSD\Integrations\UptimeRobot;
 
-final class UptimeRobot
+final readonly class UptimeRobot
 {
     private Client $client;
 
@@ -15,9 +15,7 @@ final class UptimeRobot
     {
         $monitors = $this->client->getMonitors()['monitors'] ?? [];
 
-        usort($monitors, function ($a, $b) {
-            return $b['status'] <=> $a['status'];
-        });
+        usort($monitors, fn($a, $b) => $b['status'] <=> $a['status']);
 
         return $monitors;
     }

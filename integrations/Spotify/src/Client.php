@@ -8,8 +8,8 @@ use SpotifyWebAPI\SpotifyWebAPIException;
 
 final class Client
 {
-  private Session $session;
-  private SpotifyWebAPI $api;
+  private readonly Session $session;
+  private readonly SpotifyWebAPI $api;
   private array $tokens;
 
   public function __construct()
@@ -60,9 +60,8 @@ final class Client
 
   /**
    * FOR DEVELOPMENT ONLY
-   * @return void
    */
-  private function printAuthUrl(): void
+  private function printAuthUrl(): never
   {
     print_r($this->session->getAuthorizeUrl(['scope' => ['user-read-playback-state', 'user-read-currently-playing']]));
     die;
@@ -70,9 +69,8 @@ final class Client
 
   /**
    * FOR DEVELOPMENT ONLY
-   * @return void
    */
-  private function initNewTokens(): void
+  private function initNewTokens(): never
   {
     $this->session->requestAccessToken('AQAYSq5qI8_KqSCJ_yNi8zpoD0xY-lN3hxvpR19hyDdl3Dn4R6sGc6KWC1hgOHZLB44H3ldJDTAk4NQ0yCreYdUvvC-6rwmfRL6EihO3baV43OXN-9DCTT8xMfW7JISqmTc_9u9fm1m4wvhx9iT7hbIf7sEC9HTkRgHH93vXHk03b2L7EH3IWHv7Sx-GqBoaIAZ2sTWxsHsmC4DlxGzyqBC-mbwYbAjl6vmt3qiR4z2HPchfi3s'); // Code returned from Spotify in the redirected url parameters
     echo $this->session->getAccessToken() . '&nbsp;<br>&nbsp;';
@@ -105,7 +103,7 @@ final class Client
    */
   private function setTokens(string $accessToken, string $refreshToken, int $tokenExpiration): bool
   {
-    $json = array('accessToken' => $accessToken, 'refreshToken' => $refreshToken, 'tokenExpiration' => $tokenExpiration);
+    $json = ['accessToken' => $accessToken, 'refreshToken' => $refreshToken, 'tokenExpiration' => $tokenExpiration];
 
     return (bool)file_put_contents(__DIR__ . '/../../../config/spotify-tokens.json', json_encode($json));
   }
@@ -118,13 +116,13 @@ final class Client
     try {
       $currentlyPlayingTrack = $this->api->getMyCurrentTrack();
     }
-    catch (SpotifyWebAPIException $e) {
+    catch (SpotifyWebAPIException) {
       $this->login();
 
       try {
           $currentlyPlayingTrack = $this->api->getMyCurrentTrack();
       }
-      catch (SpotifyWebAPIException $e) {
+      catch (SpotifyWebAPIException) {
         return null;
       }
     }

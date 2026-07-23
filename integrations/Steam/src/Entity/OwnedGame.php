@@ -34,20 +34,12 @@ class OwnedGame extends SteamEntity
    */
   public function getPlaytimeForever(bool $inHours = false, string $platform = 'all'): int
   {
-    switch ($platform) {
-      case 'windows':
-        $playtime = $this->playtimeWindowsForever;
-        break;
-      case 'mac':
-        $playtime = $this->playtimeMacForever;
-        break;
-      case 'linux':
-        $playtime = $this->playtimeLinuxForever;
-        break;
-      default:
-        $playtime = $this->playtimeForever;
-        break;
-    }
+    $playtime = match ($platform) {
+        'windows' => $this->playtimeWindowsForever,
+        'mac' => $this->playtimeMacForever,
+        'linux' => $this->playtimeLinuxForever,
+        default => $this->playtimeForever,
+    };
 
     if ($inHours) {
       return round($playtime / 60);

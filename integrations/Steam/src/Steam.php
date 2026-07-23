@@ -5,7 +5,7 @@ namespace SSD\Integrations\Steam;
 use jeroendn\PhpHelpers\Helper\ArrayHelper;
 use SSD\Integrations\Steam\Entity\OwnedGame;
 
-final class Steam
+final readonly class Steam
 {
   private Client $client;
 
@@ -21,20 +21,12 @@ final class Steam
   {
     $games = $this->client->getOwnedGames();
 
-    switch ($platform) {
-      case 'windows':
-        $playtimePlatform = 'playtimeWindowsForever';
-        break;
-      case 'mac':
-        $playtimePlatform = 'playtimeMacForever';
-        break;
-      case 'linux':
-        $playtimePlatform = 'playtimeLinuxForever';
-        break;
-      default:
-        $playtimePlatform = 'playtimeForever';
-        break;
-    }
+    $playtimePlatform = match ($platform) {
+        'windows' => 'playtimeWindowsForever',
+        'mac' => 'playtimeMacForever',
+        'linux' => 'playtimeLinuxForever',
+        default => 'playtimeForever',
+    };
 
     ArrayHelper::sortByProperty($games, $playtimePlatform, false);
 
