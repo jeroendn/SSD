@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         colors="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         bootstrap="vendor/autoload.php"
+         cacheDirectory="tmp/phpunit"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/12.5/phpunit.xsd">
+    <testsuites>
+        <testsuite name="app">
+            <directory>tests/TestCase/</directory>
+        </testsuite>
+    </testsuites>
+
+    <!-- Ignore vendor tests in code coverage reports -->
+    <source>
+        <include>
+            <directory suffix=".php">integrations/*/src/</directory>
+            <directory suffix=".php">php/</directory>
+        </include>
+    </source>
+</phpunit>

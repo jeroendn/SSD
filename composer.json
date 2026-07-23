@@ -20,9 +20,19 @@
       "SSD\\Integrations\\Tweakers\\": "integrations/Tweakers/src"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "SSD\\Test\\": "tests/"
+    }
+  },
   "prefer-stable": true,
-  "scripts": {},
+  "scripts": {
+    "phpunit": "phpunit"
+  },
   "config": {
     "sort-packages": true
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^12.5"
   }
 }
