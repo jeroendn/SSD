@@ -33,8 +33,7 @@ final readonly class Client
 
         try {
             $response = (new GuzzleClient())->request('GET', $url);
-        }
-        catch (Throwable) {
+        } catch (Throwable) {
             return null; // Silent fail
         }
 
@@ -52,8 +51,7 @@ final readonly class Client
 
         try {
             $response = (new GuzzleClient())->request('GET', $url);
-        }
-        catch (Throwable) {
+        } catch (Throwable) {
             return []; // Silent fail
         }
 
@@ -71,14 +69,13 @@ final readonly class Client
     /**
      * TODO Should be accepting multiple appIds and converting to custom class like OwnedGame.
      */
-    public function getAppDetails(int $appId): object|null
+    public function getAppDetails(int $appId): ?object
     {
         $url = sprintf('%s%s?appids=%s', self::BASE_URL_PUBLIC_API, self::URL_GET_APP_DETAILS, $appId);
 
         try {
             $response = (new GuzzleClient())->request('GET', $url);
-        }
-        catch (Throwable) {
+        } catch (Throwable) {
             return null; // Silent fail
         }
 

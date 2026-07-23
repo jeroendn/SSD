@@ -8,7 +8,7 @@ final readonly class UptimeRobot
 
     public function __construct()
     {
-        $this->client = new Client;
+        $this->client = new Client();
     }
 
     public function getMonitors(): array

@@ -11,18 +11,19 @@ final class Tweakers
 
     public function __construct()
     {
-        if (!($x = simplexml_load_file(self::URL)))
+        if (!($x = simplexml_load_file(self::URL))) {
             return [];
+        }
 
         $this->posts = [];
 
         foreach ($x->channel->item as $item) {
             $post              = new Post();
-            $post->date        = (string)$item->pubDate;
+            $post->date        = (string) $item->pubDate;
             $post->timestamp   = strtotime($item->pubDate);
-            $post->url         = (string)$item->link;
-            $post->title       = (string)$item->title;
-            $post->description = (string)$item->description;
+            $post->url         = (string) $item->link;
+            $post->title       = (string) $item->title;
+            $post->description = (string) $item->description;
 
             $this->posts[] = $post;
         }

@@ -25,14 +25,13 @@ final class Client
             'form_params' => [
                 'api_key' => $this->apiKey,
                 'format' => 'json',
-                'logs' => '0'
-            ]
+                'logs' => '0',
+            ],
         ];
 
         try {
             $response = (new GuzzleClient())->request('POST', $url, $options);
-        }
-        catch (Throwable) {
+        } catch (Throwable) {
             return null; // Silent fail
         }
 
