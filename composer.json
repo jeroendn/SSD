@@ -15,7 +15,8 @@
   "require-dev": {
     "ergebnis/composer-normalize": "^2.52",
     "phpstan/phpstan": "^2.2",
-    "phpunit/phpunit": "^12.5"
+    "phpunit/phpunit": "^12.5",
+    "rector/rector": "^2.5"
   },
   "prefer-stable": true,
   "autoload": {
@@ -40,6 +41,8 @@
   "scripts": {
     "phpstan": "phpstan analyse",
     "phpstan-baseline": "phpstan analyse --generate-baseline",
-    "phpunit": "phpunit"
+    "phpunit": "phpunit",
+    "rector-check": "rector --dry-run",
+    "rector-fix": "rector"
   }
 }
