@@ -30,7 +30,7 @@ final class Client
         ];
 
         try {
-            $response = (new GuzzleClient())->request('POST', $url, $options);
+            $response = new GuzzleClient()->request('POST', $url, $options);
         } catch (Throwable) {
             return null; // Silent fail
         }

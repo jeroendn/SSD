@@ -138,7 +138,7 @@ final class ClientTest extends TestCase
         $api = $this->createStub(SpotifyWebAPI::class);
         $api->method('getMyCurrentTrack')->willReturn((object) []);
 
-        (new Client($session, $api, $this->tokensFile))->getCurrentlyPlayingTrack();
+        new Client($session, $api, $this->tokensFile)->getCurrentlyPlayingTrack();
 
         $this->assertSame(
             ['accessToken' => 'refreshed-access-token', 'refreshToken' => 'stored-refresh-token', 'tokenExpiration' => 1_900_000_000],

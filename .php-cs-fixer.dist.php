@@ -5,14 +5,14 @@ declare(strict_types=1);
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 
-return (new Config())
+return new Config()
     ->setRiskyAllowed(false)
     ->setCacheFile(__DIR__ . '/tmp/cs-fixer')
     ->setRules([
         '@auto' => true, // @PER-CS + PHP migration level from composer.json
     ])
     ->setFinder(
-        (new Finder())
+        new Finder()
             ->in(__DIR__ . '/integrations')
             ->in(__DIR__ . '/php')
             ->in(__DIR__ . '/tests')

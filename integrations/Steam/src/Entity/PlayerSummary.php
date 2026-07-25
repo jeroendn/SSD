@@ -48,11 +48,11 @@ class PlayerSummary extends SteamEntity
         $this->personaState = (int) $data['personastate'];
         $this->communityVisibilityState = (int) $data['communityvisibilitystate'];
         $this->profileState = (bool) $data['profilestate'];
-        $this->lastLogoff = (new DateTimeImmutable())->setTimeStamp($data['lastlogoff']);
+        $this->lastLogoff = new DateTimeImmutable()->setTimeStamp($data['lastlogoff']);
         $this->commentPermission = (isset($data['commentpermission']));
         $this->realName = (isset($data['realname']) ? (string) $data['realname'] : null);
         $this->primaryClanId = (isset($data['primaryclanid']) ? (string) $data['primaryclanid'] : null);
-        $this->timeCreated = (isset($data['timecreated']) ? (new DateTimeImmutable())->setTimeStamp($data['timecreated']) : null);
+        $this->timeCreated = (isset($data['timecreated']) ? new DateTimeImmutable()->setTimeStamp($data['timecreated']) : null);
         $this->gameId = (isset($data['gameid']) ? (int) $data['gameid'] : null);
         $this->gameServerIp = (isset($data['gameserverip']) ? (string) $data['gameserverip'] : null);
         $this->gameExtraInfo = (isset($data['gameextrainfo']) ? (string) $data['gameextrainfo'] : null);

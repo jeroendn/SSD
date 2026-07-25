@@ -32,7 +32,7 @@ final readonly class Client
         $url = sprintf('%s%s?key=%s&steamids=%s&format=json', self::BASE_URL, self::URL_GET_PLAYER_SUMMARIES, $this->apiKey, $this->steamId);
 
         try {
-            $response = (new GuzzleClient())->request('GET', $url);
+            $response = new GuzzleClient()->request('GET', $url);
         } catch (Throwable) {
             return null; // Silent fail
         }
@@ -50,7 +50,7 @@ final readonly class Client
         $url = sprintf('%s%s?key=%s&steamid=%s&include_appinfo=1&include_played_free_games=1&format=json', self::BASE_URL, self::URL_GET_OWNED_GAMES, $this->apiKey, $this->steamId);
 
         try {
-            $response = (new GuzzleClient())->request('GET', $url);
+            $response = new GuzzleClient()->request('GET', $url);
         } catch (Throwable) {
             return []; // Silent fail
         }
@@ -74,7 +74,7 @@ final readonly class Client
         $url = sprintf('%s%s?appids=%s', self::BASE_URL_PUBLIC_API, self::URL_GET_APP_DETAILS, $appId);
 
         try {
-            $response = (new GuzzleClient())->request('GET', $url);
+            $response = new GuzzleClient()->request('GET', $url);
         } catch (Throwable) {
             return null; // Silent fail
         }
