@@ -4,5 +4,7 @@ node_modules/
 config/
 config.php
 .env
-tmp/
-public/css/
+tmp/*
+!tmp/.gitkeep
+public/*
+!public/.gitkeep

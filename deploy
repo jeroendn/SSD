@@ -43,6 +43,6 @@ sudo docker exec -it $CONTAINER_NAME npm install
 sudo docker exec -it $CONTAINER_NAME npx modclean -r -n default:safe,default:caution
 
 echo -e "${SUCCESS}Building assets${NC}"
-sudo docker exec -it $CONTAINER_NAME npx mix --production
+sudo docker exec -it $CONTAINER_NAME npm run build
 
 echo -e "${SUCCESS}Deployment finished${NC}"

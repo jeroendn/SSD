@@ -1,19 +1,17 @@
 {
   "name": "ssd",
-  "scripts": {},
+  "scripts": {
+    "build": "vite build",
+    "watch": "vite build --watch"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jeroendn/ssd.git"
   },
   "homepage": "https://github.com/jeroendn/ssd#readme",
   "devDependencies": {
-    "laravel-mix": "^6.0.49",
     "modclean": "^3.0.0-beta.1",
-    "resolve-url-loader": "^5.0.0",
     "sass": "^1.66.1",
-    "sass-loader": "^12.1.0"
-  },
-  "overrides": {
-    "webpack": "~5.104.1"
+    "vite": "^7.0.0"
   }
 }
