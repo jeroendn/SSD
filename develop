@@ -58,9 +58,9 @@ Dev commands (executed inside the php_ssd container):
   checkout, c      composer + npm install and asset build
   install          composer install + npm install + asset build
   update           composer update + npm update
-  watch            rebuild assets on change (mix watch)
   code-quality-assurance, cqa  quality gate: normalize + validate + rector + cs-fix + phpstan + phpunit
   composer <args>  run any composer command in the container
+  npm <args>       run any npm command in the container, e.g. ./develop npm run watch
 
 Anything else is passed straight through to `docker compose`, e.g.:
   ./develop up -d --build
@@ -86,7 +86,7 @@ case "${1:-}" in
         if run composer install \
             && run npm install \
             && run npx modclean -r -n default:safe,default:caution \
-            && run npx mix; then
+            && run npm run build; then
             ok "Installation finished"
         else
             err "Installation failed"
@@ -102,12 +102,13 @@ case "${1:-}" in
             exit 1
         fi
         ;;
-    watch)
-        run npx mix watch
-        ;;
     composer)
         shift
         run composer "$@"
+        ;;
+    npm)
+        shift
+        run npm "$@"
         ;;
     code-quality-assurance|cqa)
         # TODO: convert to `run vendor/bin/code-quality-assurance.sh` once
