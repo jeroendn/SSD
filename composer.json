@@ -4,11 +4,11 @@
   "license": "MIT",
   "type": "project",
   "require": {
-    "php": "^8.3",
+    "php": "^8.5",
     "ext-curl": "^8.0",
     "ext-simplexml": "*",
     "guzzlehttp/guzzle": "^7.4",
-    "jeroendn/php-helpers": "0.8-beta",
+    "jeroendn/php-helpers": "^1.0",
     "jeroendn/php-js-console-logger": "^1.0",
     "jwilsson/spotify-web-api-php": "^5.2"
   },

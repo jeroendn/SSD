@@ -75,30 +75,13 @@ case "${1:-}" in
         usage
         ;;
     checkout|c)
-        if run ./develop install; then
-            ok "Checkout finished"
-        else
-            err "Checkout failed"
-            exit 1
-        fi
-        ;;
-    install)
         if run composer install \
             && run npm install \
             && run npx modclean -r -n default:safe,default:caution \
             && run npm run build; then
-            ok "Installation finished"
+            ok "Checkout finished"
         else
-            err "Installation failed"
-            exit 1
-        fi
-        ;;
-    update)
-        if run composer update \
-            && run npm update; then
-            ok "Update finished"
-        else
-            err "Update failed"
+            err "Checkout failed"
             exit 1
         fi
         ;;
@@ -111,15 +94,7 @@ case "${1:-}" in
         run npm "$@"
         ;;
     code-quality-assurance|cqa)
-        # TODO: convert to `run vendor/bin/code-quality-assurance.sh` once
-        # jeroendn/php-helpers can be bumped to >=1.0.0 — the first release
-        # that ships the script. 1.0.0 requires PHP 8.5; this repo runs 8.3.
-        if run composer normalize \
-            && run composer validate \
-            && run composer rector-fix \
-            && run composer cs-fix \
-            && run composer phpstan \
-            && run composer phpunit; then
+        if run vendor/bin/code-quality-assurance.sh; then
             ok "Code quality assurance completed"
         else
             err "Code quality assurance failed"

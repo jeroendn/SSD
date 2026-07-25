@@ -44,7 +44,7 @@ Both the key and the value are defined in `config.php`.
 
 ## Requirements
 
-- Docker (the container ships PHP 8.3-FPM, Composer, Node.js, and npm)
+- Docker (the container ships PHP 8.5-FPM, Composer, Node.js, and npm)
 - A separately running Caddy instance attached to the external `docker_server_caddy`
   Docker network — [docker-compose.yml](docker-compose.yml) joins that network, and
   [docker/caddy/Caddyfile](docker/caddy/Caddyfile) is the site config for that Caddy
