@@ -197,7 +197,7 @@ final class ClientTest extends TestCase
         $this->writeValidTokensFile();
 
         $api = $this->createStub(SpotifyWebAPI::class);
-        $api->method('getMyCurrentTrack')->willReturn(''); // Spotify responds with an empty 204 response when nothing is playing
+        $api->method('getMyCurrentTrack')->willReturn(null); // Spotify responds with an empty 204 response when nothing is playing, which the library parses to null
 
         $client = new Client($this->stubSessionWithAccessToken(), $api, $this->tokensFile);
 
