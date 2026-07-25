@@ -31,18 +31,6 @@ parameters:
 			path: integrations/Steam/src/Client.php
 
 		-
-			message: '#^Cannot access property \$data on mixed\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: integrations/Steam/src/Client.php
-
-		-
-			message: '#^Method SSD\\Integrations\\Steam\\Client\:\:getAppDetails\(\) should return object\|null but returns mixed\.$#'
-			identifier: return.type
-			count: 1
-			path: integrations/Steam/src/Client.php
-
-		-
 			message: '#^Parameter \#1 \$data of class SSD\\Integrations\\Steam\\Entity\\OwnedGame constructor expects array, mixed given\.$#'
 			identifier: argument.type
 			count: 1

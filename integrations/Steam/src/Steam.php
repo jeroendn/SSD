@@ -28,7 +28,7 @@ final readonly class Steam
             default => 'playtimeForever',
         };
 
-        ArrayHelper::sortByProperty($games, $playtimePlatform, false);
+        ArrayHelper::sortObjectsByProperty($games, $playtimePlatform, false);
 
         $topTenGames = [];
 
@@ -46,7 +46,7 @@ final readonly class Steam
     {
         $games = $this->client->getOwnedGames();
 
-        ArrayHelper::sortByProperty($games, 'playtime2Weeks', false);
+        ArrayHelper::sortObjectsByProperty($games, 'playtime2Weeks', false);
 
         $topTenGames = [];
 

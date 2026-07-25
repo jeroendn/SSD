@@ -11,37 +11,18 @@ $steamClient = new Client;
     </div>
     <div class="widget-body">
         <?php
-        $publicApiData = file_get_contents('https://api.steampowered.com/ISteamChartsService/GetGamesByConcurrentPlayers/v1/');
-        $publicApiData = json_decode($publicApiData);
-
-        $ownedGames = $steamClient->getOwnedGames();
-
-        $maxItems = 10;
+        $mostPlayed = $steamClient->getMostPlayedGames();
+        $apps       = $steamClient->getApps(array_keys($mostPlayed));
         ?>
-        <?php for ($i = 0; $i < 10; $i++): ?>
+        <?php foreach ($mostPlayed as $appId => $playerCount): ?>
             <?php
-            $app               = $publicApiData?->response?->ranks[$i];
-            $appDetailsPrivate = $ownedGames[$app->appid] ?? null;
-            if ($appDetailsPrivate) {
-                $appName   = $appDetailsPrivate->name;
-                $appImgUrl = 'https://media.steampowered.com/steamcommunity/public/images/apps/' . $appDetailsPrivate->appId . '/' . $appDetailsPrivate->imgIconUrl . '.jpg';
-            }
-            else {
-                $appDetailsPublic = $steamClient->getAppDetails($app->appid);
-
-                $appName = $appDetailsPublic->name;
-
-                $appImgUrl = 'https://cdn.cloudflare.steamstatic.com/steam/apps/' . $app->appid . '/capsule_184x69.jpg';
-
-                if (@file_get_contents($appImgUrl) === false) {
-                    $appImgUrl = 'https://cdn.cloudflare.steamstatic.com/steam/apps/' . $app->appid . '/header.jpg';
-                }
-            }
+            $app       = $apps[$appId] ?? null;
+            $appImgUrl = $app?->getIconUrl() ?? 'https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/' . $appId . '/capsule_184x69.jpg';
             ?>
             <div class="game">
                 <img src="<?= $appImgUrl ?>">
-                <p><?= $appName ?><span>&nbsp;<?= number_format($app->concurrent_in_game) ?></span></p>
+                <p><?= htmlspecialchars($app->name ?? 'App ' . $appId) ?><span>&nbsp;<?= number_format($playerCount) ?></span></p>
             </div>
-        <?php endfor; ?>
+        <?php endforeach; ?>
     </div>
 </div>
