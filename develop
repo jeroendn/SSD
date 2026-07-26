@@ -55,12 +55,10 @@ usage() {
 Usage: ./develop <command>
 
 Dev commands (executed inside the php_ssd container):
-  checkout, c      composer + npm install and asset build
-  install          composer install + npm install + asset build
-  update           composer update + npm update
+  checkout, c                  composer + npm install and asset build
   code-quality-assurance, cqa  quality gate: normalize + validate + rector + cs-fix + phpstan + phpunit
-  composer <args>  run any composer command in the container
-  npm <args>       run any npm command in the container, e.g. ./develop npm run watch
+  composer <args>              run any composer command in the container
+  npm <args>                   run any npm command in the container, e.g. ./develop npm run watch
 
 Anything else is passed straight through to `docker compose`, e.g.:
   ./develop up -d --build

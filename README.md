@@ -99,7 +99,6 @@ The [develop](develop) script wraps `docker compose` and runs dev commands insid
 
 ```
 ./develop checkout          # composer + npm install and asset build
-./develop update            # composer update + npm update
 ./develop cqa               # quality gate: normalize + validate + rector + cs-fix + phpstan + phpunit
 ./develop composer <args>   # any composer command in the container
 ./develop npm <args>        # any npm command, e.g. ./develop npm run watch
