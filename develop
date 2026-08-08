@@ -75,7 +75,6 @@ case "${1:-}" in
     checkout|c)
         if run composer install \
             && run npm install \
-            && run npx modclean -r -n default:safe,default:caution \
             && run npm run build; then
             ok "Checkout finished"
         else

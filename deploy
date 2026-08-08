@@ -40,7 +40,6 @@ sudo docker compose up -d
 echo -e "${SUCCESS}Installing libraries${NC}"
 sudo docker exec -it $CONTAINER_NAME composer install --no-dev --optimize-autoloader --no-interaction
 sudo docker exec -it $CONTAINER_NAME npm install
-sudo docker exec -it $CONTAINER_NAME npx modclean -r -n default:safe,default:caution
 
 echo -e "${SUCCESS}Building assets${NC}"
 sudo docker exec -it $CONTAINER_NAME npm run build
