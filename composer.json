@@ -43,7 +43,7 @@
     "cs-check": "php-cs-fixer check",
     "cs-fix": "php-cs-fixer fix",
     "phpstan": "phpstan analyse",
-    "phpstan-baseline": "phpstan analyse --generate-baseline",
+    "phpstan-baseline": "phpstan analyse --generate-baseline --memory-limit=2G",
     "phpunit": "phpunit",
     "rector-check": "rector --dry-run",
     "rector-fix": "rector"

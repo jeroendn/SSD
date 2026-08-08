@@ -16,16 +16,16 @@ $uptimeRobot = new UptimeRobot();
             $statusCode  = $monitor['status'];
             $statusLabel = match ($statusCode) {
                 0       => 'paused',
+                1       => 'unchecked',
                 2       => 'online',
-                3       => 'redirected',
-                4       => 'user error',
-                5       => 'server error',
+                8       => 'seems down',
+                9       => 'down',
                 default => 'unknown'
             };
             $statusClass = match ($statusCode) {
                 2       => 'success',
-                0, 3    => 'warning',
-                4, 5    => 'error',
+                0, 1, 8 => 'warning',
+                9       => 'error',
                 default => null
             };
             ?>
