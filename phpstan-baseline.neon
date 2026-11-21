@@ -163,7 +163,7 @@ parameters:
 			path: integrations/UptimeRobot/src/UptimeRobot.php
 
 		-
-			message: '#^Parameter \#1 \$array of function usort expects TArray of array, mixed given\.$#'
+			message: '#^Parameter \#1 \$array of function usort expects array, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: integrations/UptimeRobot/src/UptimeRobot.php
